@@ -181,7 +181,7 @@
       const best = attempts.reduce((score, attempt) => Math.max(score, Number(attempt.correctCount || 0)), 0);
       const mistakes = getMistakesFor(chapter.id).length;
       const chapterLessons = window.IT1140_LESSONS?.[chapter.id] || [];
-      const doneLessons = chapterLessons.filter((_, index) => state.learningProgress[chapter.id + "-" + index]?.completed).length;
+      const doneLessons = chapterLessons.filter((lesson) => state.learningProgress[lessonProgressKey(chapter.id, lesson)]?.completed).length;
       const cardTopic = escapeHtml(chapter.topic);
       return `
         <article class="chapter-card" style="--chapter-accent:${chapter.color};--chapter-soft:${chapter.soft}">
@@ -385,6 +385,38 @@
   }
 
 
+  function lessonProgressKey(chapterId, lesson) {
+    return "slide-v2-" + chapterId + "-" + lesson.id;
+  }
+
+  function pickLessonChecks(chapter, lesson) {
+    const families = Array.isArray(chapter.questionFamilies) ? chapter.questionFamilies : chapter.questions;
+    const tags = Array.isArray(lesson.topicTags) ? lesson.topicTags : [];
+    const tagged = families.filter((question) => tags.includes(question.topic));
+    const shuffle = (items) => {
+      const list = [...items];
+      for (let i = list.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+      return list;
+    };
+    const selected = shuffle(tagged).slice(0, 3);
+    const used = new Set(selected.map((question) => question.familyId || question.id));
+    if (selected.length < 3) {
+      const fallback = shuffle(families.filter((question) => !used.has(question.familyId || question.id)));
+      selected.push(...fallback.slice(0, 3 - selected.length));
+    }
+    return selected.map((question) => ({
+      id: question.id,
+      level: question.level || "core",
+      prompt: question.prompt,
+      choices: question.options || question.choices || [],
+      answer: question.answer,
+      explanation: question.explanation || "Xem lại mục kiến thức liên quan trong bài giảng.",
+    }));
+  }
+
   function startTeaching(chapterId) {
     const chapter = chapterById(chapterId);
     if (!chapter || !window.IT1140_LESSONS?.[chapter.id]) return;
@@ -400,7 +432,7 @@
     const lesson = window.IT1140_LESSONS?.[Number(chapterId)]?.[Number(lessonIndex)];
     if (!chapter || !lesson) return;
     window.currentTeachingChapter = chapter.id;
-    lessonSession = { chapterId: chapter.id, lessonIndex: Number(lessonIndex), testing: false, answers: {}, submitted: false, startedAt: Date.now() };
+    lessonSession = { chapterId: chapter.id, lessonIndex: Number(lessonIndex), checks: pickLessonChecks(chapter, lesson), testing: false, answers: {}, submitted: false, startedAt: Date.now() };
     screen = "lesson";
     render();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -410,9 +442,9 @@
     const selectedChapter = chapterById(Number(window.currentTeachingChapter));
     if (!selectedChapter) return renderHome();
     const lessons = window.IT1140_LESSONS?.[selectedChapter.id] || [];
-    const completed = lessons.filter((_, index) => state.learningProgress[selectedChapter.id + "-" + index]?.completed).length;
+    const completed = lessons.filter((lesson) => state.learningProgress[lessonProgressKey(selectedChapter.id, lesson)]?.completed).length;
     const cards = lessons.map((lesson, index) => {
-      const progress = state.learningProgress[selectedChapter.id + "-" + index];
+      const progress = state.learningProgress[lessonProgressKey(selectedChapter.id, lesson)];
       const status = progress?.completed ? "Đã kiểm tra · cao nhất " + progress.bestScore + "/3" : "Bài giảng + ví dụ + 3 câu hỏi";
       const buttonLabel = progress?.completed ? "Học lại" : "Vào học";
       return '<article class="lesson-card ' + (progress?.completed ? "completed" : "") + '">' +
@@ -432,8 +464,8 @@
     const lesson = window.IT1140_LESSONS?.[lessonSession?.chapterId]?.[lessonSession?.lessonIndex];
     if (!chapter || !lesson) return renderHome();
     const number = lessonSession.lessonIndex + 1;
-    const key = chapter.id + "-" + lessonSession.lessonIndex;
-    const questions = lesson.checks.map((question, index) => {
+    const key = lessonProgressKey(chapter.id, lesson);
+    const questions = lessonSession.checks.map((question, index) => {
       const selected = lessonSession.answers[index];
       const options = question.choices.map((choice, choiceIndex) => {
         const isSelected = selected === choiceIndex;
@@ -471,10 +503,10 @@
     if (!lessonSession || lessonSession.submitted) return;
     const chapter = chapterById(lessonSession.chapterId);
     const lesson = window.IT1140_LESSONS[lessonSession.chapterId][lessonSession.lessonIndex];
-    const questions = lesson.checks.map((item, index) => ({
+    const questions = lessonSession.checks.map((item, index) => ({
       id: "lesson-" + lessonSession.chapterId + "-" + lessonSession.lessonIndex + "-" + index,
       chapterId: lessonSession.chapterId,
-      level: "core",
+      level: item.level || "core",
       prompt: item.prompt,
       choices: item.choices,
       answerIndex: item.answer,
@@ -482,7 +514,7 @@
       explanation: item.explanation,
     }));
     const correctCount = questions.filter((question) => question.selectedIndex === question.answerIndex).length;
-    const key = chapter.id + "-" + lessonSession.lessonIndex;
+    const key = lessonProgressKey(chapter.id, lesson);
     const previous = state.learningProgress[key] || {};
     const completedAt = new Date().toISOString();
     const lessonTitle = chapter.title + " · " + lesson.title;
@@ -491,6 +523,7 @@
       id: typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : "lesson-" + Date.now(),
       chapterId: chapter.id,
       lessonIndex: lessonSession.lessonIndex,
+      lessonId: lesson.id,
       lessonTitle,
       mode: "lesson",
       totalCount: questions.length,
