@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff1f5" />
+    <meta name="description" content="Ôn tập trắc nghiệm Tin học đại cương HUST IT1140 theo 6 chương, có lưu lịch sử và giải thích đáp án." />
+    <title>Ôn tập IT1140 · HUST</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <div class="ambient ambient-three" aria-hidden="true"></div>
+
+    <div class="doraemon-backdrop" aria-hidden="true">
+      <img src="assets/doraemon-wallpaper.svg" alt="" />
+      <span class="backdrop-glint glint-one"></span>
+      <span class="backdrop-glint glint-two"></span>
+      <span class="backdrop-glint glint-three"></span>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Trang chủ ôn tập IT1140">
+        <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>pinkbyte<span>.</span></strong><small>HUST · IT1140</small></span>
+      </a>
+      <nav class="topnav" aria-label="Điều hướng chính">
+        <button class="nav-link active" data-action="home">Tổng quan</button>
+        <button class="nav-link" data-action="history">Lịch sử làm bài</button>
+      </nav>
+      <div class="topbar-right">
+        <div class="theme-switcher" aria-label="Chọn giao diện">
+          <button class="theme-option" type="button" data-action="theme" data-theme-choice="doraemon" aria-label="Chọn giao diện Doraemon">
+            <span class="theme-icon dora-icon" aria-hidden="true"><i></i></span><span class="theme-name">Doraemon</span>
+          </button>
+          <button class="theme-option" type="button" data-action="theme" data-theme-choice="kuromi" aria-label="Chọn giao diện Kuromi">
+            <span class="theme-icon kuromi-icon" aria-hidden="true"><i></i></span><span class="theme-name">Kuromi</span>
+          </button>
+        </div>
+        <span class="course-pill"><span class="course-dot"></span> Tin học đại cương</span>
+        <button class="avatar-button" type="button" data-action="edit-name" aria-label="Đổi tên">?</button>
+      </div>
+    </header>
+
+    <main id="app" class="app-shell" aria-live="polite"></main>
+    <div id="chat-root"></div>
+    <div id="name-entry-root"></div>
+
+    <footer class="site-footer">
+      <span>pinkbyte<span class="footer-dot">.</span> · IT1140 HUST</span>
+      <span>Tiến bộ nhỏ mỗi ngày cũng là tiến bộ ✿</span>
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="question-bank.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

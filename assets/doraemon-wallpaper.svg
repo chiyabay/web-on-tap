@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-label="Doraemon bay trên nền trời và vòng nước xanh">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#79d4f2"/><stop offset=".55" stop-color="#c8eff8"/><stop offset="1" stop-color="#fff4f8"/></linearGradient>
+    <linearGradient id="sea" x2="0" y2="1"><stop stop-color="#59c9ec"/><stop offset="1" stop-color="#1688bf"/></linearGradient>
+    <linearGradient id="blue" x2=".7" y2="1"><stop stop-color="#34b8e7"/><stop offset="1" stop-color="#087bb8"/></linearGradient>
+    <linearGradient id="white" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e7f7fb"/></linearGradient>
+    <radialGradient id="sun"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="softShadow" x="-.3" y="-.3" width="1.6" height="1.7"><feGaussianBlur in="SourceAlpha" stdDeviation="14"/><feOffset dy="14"/><feColorMatrix values="0 0 0 0 .10 0 0 0 0 .39 0 0 0 0 .55 0 0 0 .24 0"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="cloudBlur"><feGaussianBlur stdDeviation="1.2"/></filter>
+  </defs>
+  <style>
+    .cloud-a{animation:cloudDrift 30s ease-in-out infinite alternate}.cloud-b{animation:cloudDrift 37s ease-in-out -9s infinite alternate-reverse}
+    .water-ring{transform-box:fill-box;transform-origin:center;animation:ringPulse 8s ease-in-out infinite}
+    .doraemon{transform-box:fill-box;transform-origin:center;animation:float 5s ease-in-out infinite}
+    .friend{transform-box:fill-box;transform-origin:center;animation:float 5.6s ease-in-out infinite}
+    .nobita{animation-delay:-1.4s}.shizuka{animation-delay:-3.1s}.gian{animation-delay:-.8s}.suneo{animation-delay:-2.3s}
+    .rotor{transform-box:fill-box;transform-origin:center;animation:spin .8s linear infinite}
+    .spark{transform-box:fill-box;transform-origin:center;animation:sparkle 3.5s ease-in-out infinite}.spark:nth-of-type(2n){animation-delay:-1.4s}
+    .bell-light{animation:bell 2.8s ease-in-out infinite}
+    @keyframes cloudDrift{from{transform:translateX(-18px)}to{transform:translateX(24px)}}
+    @keyframes ringPulse{0%,100%{transform:scale(.98);opacity:.68}50%{transform:scale(1.035);opacity:.95}}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-15px) rotate(1deg)}}
+    @keyframes sparkle{0%,100%{opacity:.45;transform:scale(.78) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(18deg)}}
+    @keyframes bell{0%,100%{opacity:.25}50%{opacity:.9}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+  <path fill="url(#sky)" d="M0 0h1920v1080H0z"/>
+  <circle cx="1530" cy="178" r="310" fill="url(#sun)"/>
+  <g fill="#fff" opacity=".76" filter="url(#cloudBlur)">
+    <g class="cloud-a" transform="translate(80 108)"><ellipse cx="184" cy="112" rx="168" ry="47"/><ellipse cx="103" cy="94" rx="78" ry="55"/><ellipse cx="186" cy="73" rx="92" ry="79"/><ellipse cx="273" cy="98" rx="75" ry="56"/></g>
+    <g class="cloud-b" transform="translate(1120 82) scale(1.1)"><ellipse cx="195" cy="134" rx="190" ry="48"/><ellipse cx="109" cy="112" rx="82" ry="62"/><ellipse cx="204" cy="84" rx="101" ry="82"/><ellipse cx="300" cy="112" rx="85" ry="60"/></g>
+    <g class="cloud-a" transform="translate(610 344) scale(.65)" opacity=".7"><ellipse cx="195" cy="134" rx="190" ry="48"/><ellipse cx="109" cy="112" rx="82" ry="62"/><ellipse cx="204" cy="84" rx="101" ry="82"/></g>
+  </g>
+  <path d="M0 685c213-88 389-93 574-34 173 55 334 55 505-14 182-73 365-74 548-10 112 39 204 47 293 22v431H0z" fill="#70bd8c" opacity=".72"/>
+  <path d="M0 754c221-77 406-74 575-19 184 60 345 47 516-20 181-71 365-60 557 1 98 31 184 34 272 12v352H0z" fill="#a0d88f" opacity=".67"/>
+  <!-- Neighborhood rooftops and windows, kept behind the flying group -->
+  <g stroke="#66859a" stroke-width="4" stroke-linejoin="round">
+    <path d="M-32 862 137 733 330 858v252H-32z" fill="#f8e5b9"/>
+    <path d="m-32 862 169-129 193 125-45 26-148-98L2 888z" fill="#e98b86"/>
+    <path d="M55 910h55v67H55zm113-5h67v74h-67zM35 1015h93v95H35z" fill="#d2f0eb"/>
+    <path d="M290 914 449 803l188 115v192H290z" fill="#eff3dd"/>
+    <path d="m290 914 159-111 188 115-45 23-143-89-133 89z" fill="#8399c9"/>
+    <path d="M342 947h61v67h-61zm110-9h74v80h-74zM340 1045h116v65H340z" fill="#d7eff5"/>
+    <path d="M544 890 712 762l176 130v218H544z" fill="#fff0cf"/>
+    <path d="m544 890 168-128 176 130-44 25-133-95-128 97z" fill="#df7e91"/>
+    <path d="M592 928h56v69h-56zm112-4h66v70h-66zM610 1024h124v86H610z" fill="#c8e9f0"/>
+    <path d="M1030 899 1201 773l184 131v206h-355z" fill="#f5e3b5"/>
+    <path d="m1030 899 171-126 184 131-47 24-138-95-127 94z" fill="#e58e83"/>
+    <path d="M1080 938h63v69h-63zm112-5h68v78h-68zM1092 1030h111v80h-111z" fill="#c8e9ed"/>
+    <path d="M1338 879 1511 748l205 136v226h-378z" fill="#e5edcf"/>
+    <path d="m1338 879 173-131 205 136-47 26-158-102-134 102z" fill="#848fc6"/>
+    <path d="M1390 922h62v72h-62zm117-10h73v78h-73zM1390 1032h128v78h-128z" fill="#d4edf4"/>
+    <path d="M1683 871 1816 764l141 103v243h-274z" fill="#f8e2bd"/>
+    <path d="m1683 871 133-107 141 103-40 27-104-76-103 79z" fill="#df8e8e"/>
+    <path d="M1724 921h54v67h-54zm96-7h59v75h-59zM1720 1029h101v81h-101z" fill="#c7e8ee"/>
+  </g>
+  <g fill="#4d9d72" opacity=".9">
+    <circle cx="277" cy="820" r="50"/><circle cx="253" cy="843" r="43"/><circle cx="303" cy="848" r="42"/>
+    <circle cx="1604" cy="809" r="58"/><circle cx="1570" cy="836" r="42"/><circle cx="1647" cy="840" r="45"/>
+    <circle cx="958" cy="826" r="45"/><circle cx="927" cy="846" r="34"/><circle cx="990" cy="846" r="35"/>
+  </g>
+  <g stroke="#547b65" stroke-width="6"><path d="M278 840v93m1327-101v101M958 850v79"/></g>
+  <g class="water-ring" fill="none" stroke="#e9ffff" opacity=".83">
+    <ellipse cx="970" cy="785" rx="505" ry="132" stroke-width="8"/>
+    <ellipse cx="970" cy="785" rx="427" ry="99" stroke-width="5" opacity=".78"/>
+    <ellipse cx="970" cy="785" rx="342" ry="68" stroke-width="3" opacity=".7"/>
+  </g>
+  <g fill="#fff" opacity=".82">
+    <path d="m1110 703 12 28 29 12-29 11-12 30-11-30-29-11 29-12z" class="spark"/>
+    <path d="m1550 516 8 19 20 8-20 8-8 20-8-20-20-8 20-8z" class="spark"/>
+    <path d="m954 472 7 16 17 7-17 7-7 17-7-17-17-7 17-7z" class="spark"/>
+    <circle cx="1476" cy="335" r="7" class="spark"/><circle cx="1030" cy="585" r="6" class="spark"/><circle cx="1660" cy="724" r="5" class="spark"/>
+  </g>
+  <!-- Shizuka: pink ribbon, dark bob and pink skirt -->
+  <g transform="translate(430 635) scale(.95)">
+    <g class="friend shizuka" filter="url(#softShadow)">
+      <g transform="translate(102 2)"><g class="rotor"><path d="M0 10v-27" stroke="#d8ae43" stroke-width="6"/><ellipse cx="0" cy="-28" rx="48" ry="6" fill="#fff" stroke="#667d8e" stroke-width="3"/><path d="M-48-28q20-10 39 0m9 0q19-10 39 0" fill="none" stroke="#667d8e" stroke-width="3"/></g></g>
+      <path d="M48 59c-5-42 20-66 57-66 43 0 64 31 53 83l-13 72H51z" fill="#342b38"/>
+      <ellipse cx="102" cy="47" rx="42" ry="48" fill="#ffd9c9" stroke="#b77d79" stroke-width="3"/>
+      <path d="M62 32c11-34 71-43 91 0-20-14-40-18-59-10-12 5-21 12-32 22z" fill="#342b38"/>
+      <path d="m56 2 21-16 2 25zm44-10 22-18 3 31z" fill="#ee88b8" stroke="#d9699d" stroke-width="4" stroke-linejoin="round"/>
+      <ellipse cx="89" cy="51" rx="5" ry="8" fill="#30293a"/><ellipse cx="116" cy="51" rx="5" ry="8" fill="#30293a"/>
+      <circle cx="90" cy="48" r="1.8" fill="#fff"/><circle cx="117" cy="48" r="1.8" fill="#fff"/>
+      <path d="M97 69q7 6 14 0" fill="none" stroke="#b65e76" stroke-width="3" stroke-linecap="round"/>
+      <path d="M87 93h30v20H87z" fill="#ffd9c9"/>
+      <path d="M64 111q38-26 76 0l19 54-95 0z" fill="#fff" stroke="#dcebf3" stroke-width="4"/>
+      <path d="m68 158 91 0-13 69H81z" fill="#ec72a5" stroke="#d65c92" stroke-width="4"/>
+      <path d="m68 121-27 39m112-39 25 38" stroke="#ffd9c9" stroke-width="15" stroke-linecap="round"/>
+      <path d="M89 226v31m37-31v31" stroke="#ffd9c9" stroke-width="12" stroke-linecap="round"/>
+      <path d="M79 260q13-11 25 1v10H72q-5-5 7-11m36 1q13-12 25 0l7 10h-34z" fill="#df5366" stroke="#b64053" stroke-width="3"/>
+    </g>
+  </g>
+  <!-- Nobita: round glasses, yellow shirt and blue shorts -->
+  <g transform="translate(555 390) scale(.95)">
+    <g class="friend nobita" filter="url(#softShadow)">
+      <g transform="translate(102 0)"><g class="rotor"><path d="M0 11v-28" stroke="#d8ae43" stroke-width="6"/><ellipse cx="0" cy="-29" rx="48" ry="6" fill="#fff" stroke="#667d8e" stroke-width="3"/><path d="M-48-29q20-10 39 0m9 0q19-10 39 0" fill="none" stroke="#667d8e" stroke-width="3"/></g></g>
+      <path d="M53 42c-6-39 17-62 49-62 34 0 57 25 49 67l-12 39H59z" fill="#202333"/>
+      <ellipse cx="102" cy="45" rx="43" ry="47" fill="#ffd9c5" stroke="#bd837a" stroke-width="3"/>
+      <path d="M61 26q8-44 42-44 39 0 50 37l-23-9-13-17-10 17-12-17-11 21z" fill="#202333"/>
+      <path d="M76 39h26m26 0h25m-50 4h26" fill="none" stroke="#343849" stroke-width="4"/>
+      <circle cx="88" cy="47" r="15" fill="none" stroke="#343849" stroke-width="4"/><circle cx="115" cy="47" r="15" fill="none" stroke="#343849" stroke-width="4"/>
+      <ellipse cx="89" cy="47" rx="4" ry="6" fill="#252536"/><ellipse cx="115" cy="47" rx="4" ry="6" fill="#252536"/>
+      <path d="M99 66q8 8 16 0" fill="none" stroke="#a85e68" stroke-width="3" stroke-linecap="round"/>
+      <path d="M88 90h29v22H88z" fill="#ffd9c5"/>
+      <path d="M59 111q43-28 86 0l13 63H47z" fill="#f4d438" stroke="#d4b327" stroke-width="4"/>
+      <path d="m58 119-27 38m111-38 27 38" stroke="#ffd9c5" stroke-width="15" stroke-linecap="round"/>
+      <path d="M51 165h105l-6 44H57z" fill="#4789d2" stroke="#3273b6" stroke-width="4"/>
+      <path d="M76 207v37m54-37v37" stroke="#ffd9c5" stroke-width="13" stroke-linecap="round"/>
+      <path d="M63 245q14-10 28 1v11H55q-5-6 8-12m46 1q15-11 28 0l8 11h-36z" fill="#ef535c" stroke="#bd414c" stroke-width="3"/>
+    </g>
+  </g>
+  <!-- Gian: tall frame and orange shirt -->
+  <g transform="translate(1290 415) scale(1)">
+    <g class="friend gian" filter="url(#softShadow)">
+      <g transform="translate(103 2)"><g class="rotor"><path d="M0 12v-29" stroke="#d8ae43" stroke-width="6"/><ellipse cx="0" cy="-30" rx="52" ry="6" fill="#fff" stroke="#667d8e" stroke-width="3"/><path d="M-52-30q22-10 43 0m9 0q21-10 43 0" fill="none" stroke="#667d8e" stroke-width="3"/></g></g>
+      <path d="M45 52 34 22l26 10 12-29 25 23 20-26 21 28 27-13-5 47z" fill="#29242b"/>
+      <ellipse cx="103" cy="56" rx="57" ry="55" fill="#f0bd9c" stroke="#b67c68" stroke-width="4"/>
+      <path d="M53 37q47-24 99 0" fill="none" stroke="#2c252b" stroke-width="12" stroke-linecap="round"/>
+      <ellipse cx="84" cy="54" rx="5" ry="8" fill="#302a31"/><ellipse cx="119" cy="54" rx="5" ry="8" fill="#302a31"/>
+      <path d="M78 79q25 19 51 0" fill="none" stroke="#7e393c" stroke-width="5" stroke-linecap="round"/>
+      <path d="M87 94h31v27H87z" fill="#f0bd9c"/>
+      <path d="M40 122q63-36 127 0l17 97H23z" fill="#ef7637" stroke="#cf5d28" stroke-width="5"/>
+      <path d="m42 134-31 49m151-49 31 49" stroke="#f0bd9c" stroke-width="20" stroke-linecap="round"/>
+      <path d="M34 215h139l-4 83H39z" fill="#594a79" stroke="#42365e" stroke-width="5"/>
+      <path d="M71 296v31m67-31v31" stroke="#f0bd9c" stroke-width="17" stroke-linecap="round"/>
+      <path d="M53 327q18-13 35 1v13H40q-6-7 13-14m61 1q18-14 36 0l9 13h-45z" fill="#494052" stroke="#322a3d" stroke-width="4"/>
+    </g>
+  </g>
+  <!-- Suneo: swept-up pointed hair and turquoise top -->
+  <g transform="translate(1400 600) scale(.88)">
+    <g class="friend suneo" filter="url(#softShadow)">
+      <g transform="translate(99 -29)"><g class="rotor"><path d="M0 12v-29" stroke="#d8ae43" stroke-width="6"/><ellipse cx="0" cy="-30" rx="48" ry="6" fill="#fff" stroke="#667d8e" stroke-width="3"/><path d="M-48-30q20-10 39 0m9 0q19-10 39 0" fill="none" stroke="#667d8e" stroke-width="3"/></g></g>
+      <path d="M46 52 26 11l35 21 6-44 26 36 24-35 12 43 34-14-19 52z" fill="#292938"/>
+      <ellipse cx="99" cy="51" rx="42" ry="47" fill="#ffddc7" stroke="#bd897d" stroke-width="3"/>
+      <path d="M58 32q30-36 84-10l-13 18q-31-14-69 4z" fill="#292938"/>
+      <ellipse cx="85" cy="52" rx="4" ry="7" fill="#30293a"/><ellipse cx="112" cy="52" rx="4" ry="7" fill="#30293a"/>
+      <path d="M113 62q14 2 22 10-11 5-22 0" fill="#f0bd9c" stroke="#ca9180" stroke-width="3"/>
+      <path d="M91 82q9 5 18 0" fill="none" stroke="#a8626d" stroke-width="3" stroke-linecap="round"/>
+      <path d="M85 94h29v22H85z" fill="#ffddc7"/>
+      <path d="M57 114q42-26 84 0l15 62H42z" fill="#55bbb0" stroke="#399c96" stroke-width="4"/>
+      <path d="m58 123-26 38m106-38 25 38" stroke="#ffddc7" stroke-width="14" stroke-linecap="round"/>
+      <path d="M50 169h99l-4 43H55z" fill="#506288" stroke="#3a4b6b" stroke-width="4"/>
+      <path d="M77 210v35m47-35v35" stroke="#ffddc7" stroke-width="12" stroke-linecap="round"/>
+      <path d="M64 244q13-10 26 0v11H57q-5-5 7-11m44 0q13-10 26 0l7 11h-33z" fill="#e8edf6" stroke="#59627c" stroke-width="3"/>
+    </g>
+  </g>
+  <g transform="translate(745 250)" filter="url(#softShadow)">
+   <g class="doraemon">
+    <!-- tail and body -->
+    <path d="M365 451c80 13 95 66 53 87-36 18-68-10-54-37" fill="none" stroke="#087bb8" stroke-width="26" stroke-linecap="round"/>
+    <circle cx="420" cy="500" r="13" fill="#ef5368" stroke="#fff" stroke-width="5"/>
+    <ellipse cx="225" cy="438" rx="158" ry="185" fill="url(#blue)" stroke="#0877ae" stroke-width="8"/>
+    <ellipse cx="225" cy="474" rx="111" ry="119" fill="url(#white)" stroke="#d5f1f7" stroke-width="4"/>
+    <ellipse cx="225" cy="443" rx="58" ry="65" fill="#fff" stroke="#d6eff5" stroke-width="4"/>
+    <!-- feet and arms -->
+    <ellipse cx="122" cy="593" rx="80" ry="38" fill="url(#white)" stroke="#1593c9" stroke-width="8"/>
+    <ellipse cx="321" cy="593" rx="80" ry="38" fill="url(#white)" stroke="#1593c9" stroke-width="8"/>
+    <path d="M95 370c-52 9-84 58-61 94 20 31 57 28 81 3l46-57" fill="url(#blue)" stroke="#0877ae" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="39" cy="459" r="38" fill="url(#white)" stroke="#1593c9" stroke-width="7"/>
+    <path d="M353 369c53 11 79 58 55 94-19 28-54 27-79 5l-43-51" fill="url(#blue)" stroke="#0877ae" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="407" cy="459" r="38" fill="url(#white)" stroke="#1593c9" stroke-width="7"/>
+    <!-- head -->
+    <circle cx="225" cy="224" r="190" fill="url(#blue)" stroke="#0877ae" stroke-width="9"/>
+    <ellipse cx="225" cy="255" rx="151" ry="132" fill="url(#white)" stroke="#cdebf2" stroke-width="5"/>
+    <ellipse cx="190" cy="113" rx="39" ry="57" fill="#fff" stroke="#1688bd" stroke-width="5"/>
+    <ellipse cx="259" cy="113" rx="39" ry="57" fill="#fff" stroke="#1688bd" stroke-width="5"/>
+    <ellipse cx="199" cy="127" rx="13" ry="25" fill="#202a44"/><ellipse cx="250" cy="127" rx="13" ry="25" fill="#202a44"/>
+    <g transform="translate(225 42)"><g class="rotor"><path d="M0 12v-26" stroke="#d8ae43" stroke-width="7"/><ellipse cx="0" cy="-27" rx="65" ry="8" fill="#fff" stroke="#667d8e" stroke-width="4"/><path d="M-65-27q26-13 53 0m24 0q26-13 53 0" fill="none" stroke="#667d8e" stroke-width="4"/></g></g>
+    <circle cx="225" cy="187" r="25" fill="#ef5266" stroke="#d93c55" stroke-width="3"/>
+    <path d="M225 212v22" fill="none" stroke="#303449" stroke-width="7" stroke-linecap="round"/>
+    <path d="M128 235q97 64 194 0-10 92-97 97-87-5-97-97z" fill="#dc3449" stroke="#303449" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M151 285q74 24 148 0-16 37-74 39-58-2-74-39z" fill="#ff754e"/>
+    <g stroke="#303449" stroke-width="5" stroke-linecap="round"><path d="m99 214-47-8m48 29-53 2m60 27-44 18m171-68 47-8m-47 29 53 2m-60 27 44 18"/></g>
+    <!-- bell and collar -->
+    <path d="M89 353c74 37 196 37 272 0" fill="none" stroke="#e94b5e" stroke-width="19" stroke-linecap="round"/>
+    <circle cx="225" cy="369" r="34" fill="#f8ca3e" stroke="#d5a520" stroke-width="6"/>
+    <path d="M195 359h60m-30 10v20" stroke="#a87914" stroke-width="5" stroke-linecap="round" class="bell-light"/>
+    <path d="M179 423c27-19 65-19 92 0l-7 47h-78z" fill="#fff" stroke="#d2edf3" stroke-width="4"/>
+    <path d="M196 444h58" stroke="#c2e6ed" stroke-width="4" stroke-linecap="round"/>
+   </g>
+  </g>
+  <g fill="#fff" opacity=".48"><path d="M77 544c38-30 84-34 129-14-43-7-77 3-105 28-10 9-22-5-24-14zm1544 52c48-33 102-42 158-22-61-2-100 12-139 43-11 9-25-7-19-21z"/></g>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-label="Kuromi bay giữa trời hồng tím và những ngôi sao">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#c9b5f6"/><stop offset=".52" stop-color="#f5cbe2"/><stop offset="1" stop-color="#fff0f7"/></linearGradient>
+    <linearGradient id="hood" x2=".8" y2="1"><stop stop-color="#4d426b"/><stop offset="1" stop-color="#201b35"/></linearGradient>
+    <linearGradient id="face" x2=".3" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#ffeefa"/></linearGradient>
+    <linearGradient id="skirt" x2="0" y2="1"><stop stop-color="#27223a"/><stop offset="1" stop-color="#5c456f"/></linearGradient>
+    <radialGradient id="moon"><stop stop-color="#fff8d8" stop-opacity=".92"/><stop offset="1" stop-color="#fff8d8" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-.3" y="-.3" width="1.6" height="1.7"><feGaussianBlur in="SourceAlpha" stdDeviation="13"/><feOffset dy="14"/><feColorMatrix values="0 0 0 0 .18 0 0 0 0 .10 0 0 0 0 .31 0 0 0 .23 0"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <style>
+    .cloud{animation:cloud 32s ease-in-out infinite alternate}.cloud.delay{animation-delay:-13s;animation-direction:alternate-reverse}
+    .kuromi{transform-box:fill-box;transform-origin:center;animation:bob 5s ease-in-out infinite}
+    .stars{transform-box:fill-box;transform-origin:center;animation:twinkle 4s ease-in-out infinite}
+    .pinkskull{animation:glow 3s ease-in-out infinite}
+    @keyframes cloud{from{transform:translateX(-15px)}to{transform:translateX(25px)}}
+    @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-15px) rotate(1deg)}}
+    @keyframes twinkle{0%,100%{opacity:.42;transform:scale(.82) rotate(0)}50%{opacity:.98;transform:scale(1.13) rotate(15deg)}}
+    @keyframes glow{0%,100%{opacity:.7}50%{opacity:1}}
+  </style>
+  <path fill="url(#sky)" d="M0 0h1920v1080H0z"/>
+  <circle cx="1460" cy="213" r="340" fill="url(#moon)"/>
+  <circle cx="1482" cy="196" r="100" fill="#fff8df" opacity=".63"/>
+  <g fill="#fff" opacity=".7">
+    <g class="cloud" transform="translate(85 150)"><ellipse cx="200" cy="112" rx="174" ry="48"/><ellipse cx="114" cy="93" rx="81" ry="58"/><ellipse cx="204" cy="68" rx="93" ry="78"/><ellipse cx="295" cy="97" rx="77" ry="55"/></g>
+    <g class="cloud delay" transform="translate(1030 103) scale(1.12)"><ellipse cx="196" cy="117" rx="181" ry="48"/><ellipse cx="109" cy="96" rx="83" ry="58"/><ellipse cx="203" cy="70" rx="95" ry="78"/><ellipse cx="297" cy="98" rx="78" ry="57"/></g>
+    <g class="cloud" transform="translate(560 453) scale(.65)" opacity=".6"><ellipse cx="200" cy="112" rx="174" ry="48"/><ellipse cx="114" cy="93" rx="81" ry="58"/><ellipse cx="204" cy="68" rx="93" ry="78"/></g>
+  </g>
+  <path d="M0 696c214-50 386-26 568 24 195 53 341 48 505-12 178-65 328-67 500-18 117 33 229 45 347 24v366H0z" fill="#e5b5e3" opacity=".56"/>
+  <path d="M0 772c236-64 417-32 591 20 184 55 330 47 500-13 190-67 354-62 536-10 102 29 198 39 293 22v289H0z" fill="#c18fd1" opacity=".38"/>
+  <g fill="none" stroke="#fff4fc" stroke-linecap="round" opacity=".52">
+    <path d="M-30 886c224-86 431-74 630-9 204 67 373 59 569-13 226-83 445-82 793 6" stroke-width="9"/>
+    <path d="M-30 949c238-80 437-65 633-3 208 65 390 55 573-10 231-82 468-75 776 7" stroke-width="5"/>
+    <path d="M304 1020c177-43 315-37 462 5m408-8c185-51 346-43 521 9" stroke-width="4"/>
+  </g>
+  <g class="stars" fill="#fff8db" opacity=".9">
+    <path d="m1054 357 13 31 32 13-32 13-13 32-13-32-31-13 31-13z"/>
+    <path d="m1546 431 10 24 24 10-24 9-10 25-9-25-25-9 25-10z"/>
+    <path d="m950 590 9 21 21 9-21 9-9 21-9-21-21-9 21-9z"/>
+    <path d="m1722 688 8 18 18 8-18 8-8 18-8-18-18-8 18-8z"/>
+    <circle cx="1208" cy="485" r="6"/><circle cx="1605" cy="295" r="6"/><circle cx="992" cy="744" r="5"/>
+  </g>
+  <g class="kuromi" transform="translate(1274 283)" filter="url(#shadow)">
+    <!-- hood with long bunny ears -->
+    <path d="M130 202C93 132 90 31 150 8c39 44 59 107 57 177zm128-17c-15-88 9-170 68-185 43 58 47 134 13 204z" fill="url(#hood)" stroke="#1d1930" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M143 63c16 37 24 74 24 111l28-5c-1-39-14-80-39-115zm187-18c-23 39-34 77-36 118l28 3c7-38 18-72 32-100z" fill="#ec8fbb" opacity=".82"/>
+    <circle cx="254" cy="235" r="184" fill="url(#hood)" stroke="#1d1930" stroke-width="9"/>
+    <ellipse cx="254" cy="275" rx="143" ry="120" fill="url(#face)" stroke="#e7d5e7" stroke-width="5"/>
+    <ellipse cx="213" cy="263" rx="14" ry="24" fill="#28243a"/><ellipse cx="295" cy="263" rx="14" ry="24" fill="#28243a"/>
+    <circle cx="218" cy="256" r="4" fill="#fff"/><circle cx="300" cy="256" r="4" fill="#fff"/>
+    <path d="M248 290q7-8 14 0q-7 9-14 0" fill="#e889ad"/>
+    <path d="M238 309q16 13 32 0" fill="none" stroke="#4a4056" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="181" cy="300" rx="19" ry="10" fill="#f3b4cb" opacity=".62"/><ellipse cx="328" cy="300" rx="19" ry="10" fill="#f3b4cb" opacity=".62"/>
+    <!-- iconic skull badge -->
+    <g class="pinkskull" transform="translate(254 125)">
+      <path d="M-33 6a33 33 0 1 1 66 0c0 15-8 23-17 28v13H-17V34C-26 29-33 20-33 6z" fill="#fff0f8" stroke="#211b35" stroke-width="5"/>
+      <ellipse cx="-11" cy="7" rx="5" ry="8" fill="#28243a"/><ellipse cx="11" cy="7" rx="5" ry="8" fill="#28243a"/>
+      <path d="m0 14-5 8h10z" fill="#ec80ad"/>
+      <path d="M-15 37v12m10-12v12M5 37v12m10-12v12" stroke="#ec80ad" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <!-- small body and hands -->
+    <path d="M162 393c23-30 56-45 92-45s69 15 92 45l28 155H134z" fill="url(#skirt)" stroke="#201b34" stroke-width="8"/>
+    <path d="M180 394q74 52 148 0" fill="none" stroke="#e59ac1" stroke-width="8"/>
+    <ellipse cx="116" cy="448" rx="31" ry="37" fill="url(#face)" stroke="#211b35" stroke-width="6"/>
+    <ellipse cx="392" cy="448" rx="31" ry="37" fill="url(#face)" stroke="#211b35" stroke-width="6"/>
+    <path d="M183 539q71 24 142 0" fill="none" stroke="#30263d" stroke-width="9" stroke-linecap="round"/>
+    <path d="M190 550q-10 38 18 42t38-29m65-13q11 38-18 42t-38-29" fill="#faf1f8" stroke="#30263d" stroke-width="6"/>
+  </g>
+  <g fill="#fff" opacity=".44"><path d="M62 582c43-33 92-37 142-17-47-8-85 4-116 31-10 9-24-5-26-14zm1532-55c46-32 97-39 149-19-57-2-96 12-130 40-11 9-24-5-19-21z"/></g>
+</svg>
