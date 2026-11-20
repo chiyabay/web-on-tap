@@ -20,6 +20,7 @@
   let session = null;
   let currentResult = null;
   let resultOrigin = "live";
+  let lessonSession = null;
   let historyFilter = "all";
   let chatOpen = false;
   let toastTimer = null;
@@ -33,9 +34,10 @@
         chatMessages: Array.isArray(saved.chatMessages) ? saved.chatMessages : [],
         userName: typeof saved.userName === "string" ? saved.userName : "",
         theme: saved.theme === "kuromi" ? "kuromi" : "doraemon",
+        learningProgress: saved.learningProgress && typeof saved.learningProgress === "object" ? saved.learningProgress : {},
       };
     } catch {
-      return { history: [], lastSets: {}, chatMessages: [], userName: "", theme: "doraemon" };
+      return { history: [], lastSets: {}, chatMessages: [], userName: "", theme: "doraemon", learningProgress: {} };
     }
   }
 
@@ -89,6 +91,7 @@
 
   function attemptLabel(attempt) {
     if (attempt.mode === "midterm" || Number(attempt.chapterId) === 0) return "Ôn thi giữa kỳ";
+    if (attempt.mode === "lesson") return attempt.lessonTitle || "Bài giảng · " + (chapterById(attempt.chapterId)?.title || "Chương học");
     return chapterById(attempt.chapterId)?.title || "Lượt ôn tập";
   }
 
@@ -125,7 +128,7 @@
   function setNavActive() {
     document.querySelectorAll(".topnav .nav-link").forEach((button) => {
       const isActive = (screen === "history" && button.dataset.action === "history")
-        || ((screen === "home" || screen === "quiz" || screen === "result") && button.dataset.action === "home");
+        || ((screen === "home" || screen === "quiz" || screen === "result" || screen === "lesson-list" || screen === "lesson") && button.dataset.action === "home");
       button.classList.toggle("active", isActive);
     });
   }
@@ -138,6 +141,8 @@
     if (screen === "quiz") app.innerHTML = renderQuiz();
     if (screen === "result") app.innerHTML = renderResult();
     if (screen === "history") app.innerHTML = renderHistory();
+    if (screen === "lesson-list") app.innerHTML = renderLessons();
+    if (screen === "lesson") app.innerHTML = renderLesson();
     renderChatWidget();
     renderNameDialog();
   }
@@ -175,6 +180,8 @@
       const attempts = getAttemptsFor(chapter.id);
       const best = attempts.reduce((score, attempt) => Math.max(score, Number(attempt.correctCount || 0)), 0);
       const mistakes = getMistakesFor(chapter.id).length;
+      const chapterLessons = window.IT1140_LESSONS?.[chapter.id] || [];
+      const doneLessons = chapterLessons.filter((_, index) => state.learningProgress[chapter.id + "-" + index]?.completed).length;
       const cardTopic = escapeHtml(chapter.topic);
       return `
         <article class="chapter-card" style="--chapter-accent:${chapter.color};--chapter-soft:${chapter.soft}">
@@ -188,9 +195,11 @@
             <div class="chapter-stats">
               <span><strong>${attempts.length ? `${attempts.length} lượt` : "Chưa có lượt"}</strong> đã hoàn thành</span>
               <span><strong>${chapter.questions.length} câu</strong> trong ngân hàng</span>
+              <span><strong>${doneLessons}/${chapterLessons.length} phần</strong> đã học</span>
               ${attempts.length ? `<span><strong>${best}/${attemptTotal(attempts[0])}</strong> điểm cao nhất</span>` : ""}
             </div>
             <div class="chapter-card-actions">
+              <button class="teach-button" data-action="teach" data-id="${chapter.id}">Giảng dạy <span>✦</span></button>
               <button class="start-button" data-action="start" data-id="${chapter.id}">Luyện chương <span>↗</span></button>
               <button class="mistake-button" data-action="mistakes" data-id="${chapter.id}" title="Làm 10 câu từ nội dung đã sai">Ôn lỗi sai <span>${mistakes}</span></button>
             </div>
@@ -375,6 +384,143 @@
     openQuiz({ chapterId: 0, mode: "midterm", questions: buildMidtermQuiz() });
   }
 
+
+  function startTeaching(chapterId) {
+    const chapter = chapterById(chapterId);
+    if (!chapter || !window.IT1140_LESSONS?.[chapter.id]) return;
+    lessonSession = null;
+    window.currentTeachingChapter = chapter.id;
+    screen = "lesson-list";
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function startLesson(chapterId, lessonIndex) {
+    const chapter = chapterById(chapterId);
+    const lesson = window.IT1140_LESSONS?.[Number(chapterId)]?.[Number(lessonIndex)];
+    if (!chapter || !lesson) return;
+    window.currentTeachingChapter = chapter.id;
+    lessonSession = { chapterId: chapter.id, lessonIndex: Number(lessonIndex), testing: false, answers: {}, submitted: false, startedAt: Date.now() };
+    screen = "lesson";
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function renderLessons() {
+    const selectedChapter = chapterById(Number(window.currentTeachingChapter));
+    if (!selectedChapter) return renderHome();
+    const lessons = window.IT1140_LESSONS?.[selectedChapter.id] || [];
+    const completed = lessons.filter((_, index) => state.learningProgress[selectedChapter.id + "-" + index]?.completed).length;
+    const cards = lessons.map((lesson, index) => {
+      const progress = state.learningProgress[selectedChapter.id + "-" + index];
+      const status = progress?.completed ? "Đã kiểm tra · cao nhất " + progress.bestScore + "/3" : "Bài giảng + ví dụ + 3 câu hỏi";
+      const buttonLabel = progress?.completed ? "Học lại" : "Vào học";
+      return '<article class="lesson-card ' + (progress?.completed ? "completed" : "") + '">' +
+        '<div class="lesson-card-index">PHẦN ' + String(index + 1).padStart(2, "0") + '</div>' +
+        '<h3>' + escapeHtml(lesson.title) + '</h3>' +
+        '<p>' + escapeHtml(lesson.body.split("\n")[0]) + '</p>' +
+        '<div class="lesson-card-foot"><span>' + status + '</span><button class="primary-button compact" data-action="open-lesson" data-id="' + selectedChapter.id + '" data-index="' + index + '">' + buttonLabel + ' <span>→</span></button></div>' +
+      '</article>';
+    }).join("");
+    return '<div class="view-top"><button class="back-button" data-action="home" aria-label="Quay lại">←</button><div><div class="view-kicker">GIẢNG DẠY · IT1140</div><h1 class="view-headline">' + escapeHtml(selectedChapter.title) + '</h1></div></div>' +
+      '<section class="lesson-overview"><div><span class="eyebrow"><span class="eyebrow-mark">✿</span> HỌC THEO TỪNG PHẦN</span><h2>' + completed + '/' + lessons.length + ' phần đã hoàn thành</h2><p>Mỗi phần gồm bài giảng ngắn, ví dụ minh họa và bài kiểm tra 3 câu. Tiến độ cùng điểm cao nhất được lưu trên thiết bị này.</p></div><span class="lesson-overview-icon">' + selectedChapter.icon + '</span></section>' +
+      '<section class="lesson-grid">' + cards + '</section>';
+  }
+
+  function renderLesson() {
+    const chapter = chapterById(lessonSession?.chapterId);
+    const lesson = window.IT1140_LESSONS?.[lessonSession?.chapterId]?.[lessonSession?.lessonIndex];
+    if (!chapter || !lesson) return renderHome();
+    const number = lessonSession.lessonIndex + 1;
+    const key = chapter.id + "-" + lessonSession.lessonIndex;
+    const questions = lesson.checks.map((question, index) => {
+      const selected = lessonSession.answers[index];
+      const options = question.choices.map((choice, choiceIndex) => {
+        const isSelected = selected === choiceIndex;
+        const isCorrect = lessonSession.submitted && choiceIndex === question.answer;
+        const isWrong = lessonSession.submitted && isSelected && !isCorrect;
+        const classes = "lesson-option" + (isSelected ? " selected" : "") + (isCorrect ? " correct" : "") + (isWrong ? " incorrect" : "");
+        return '<button class="' + classes + '" data-action="lesson-answer" data-index="' + index + '" data-choice="' + choiceIndex + '" ' + (lessonSession.submitted ? "disabled" : "") + '><span>' + String.fromCharCode(65 + choiceIndex) + '</span>' + escapeHtml(choice) + '</button>';
+      }).join("");
+      let answerPanel = "";
+      if (lessonSession.submitted) {
+        const answerText = String.fromCharCode(65 + question.answer) + " · " + escapeHtml(question.choices[question.answer]);
+        answerPanel = '<div class="lesson-explanation"><strong>' + (selected === question.answer ? "✓ Chính xác" : "Đáp án: " + answerText) + '</strong><p>' + escapeHtml(question.explanation) + '</p></div>';
+      }
+      return '<article class="lesson-question"><span class="lesson-question-number">CÂU ' + String(index + 1).padStart(2, "0") + '</span><h3>' + escapeHtml(question.prompt) + '</h3><div class="lesson-options">' + options + '</div>' + answerPanel + '</article>';
+    }).join("");
+    const done = state.learningProgress[key]?.completed;
+    const progress = state.learningProgress[key];
+    let endActions = "";
+    if (lessonSession.submitted) {
+      const note = done ? " · Đã lưu, điểm cao nhất " + progress.bestScore + "/3" : " · Đã lưu vào lịch sử làm bài";
+      endActions = '<div class="lesson-finish"><div><strong>' + lessonSession.result + '/3 câu đúng</strong><span>' + note + '</span></div><button class="primary-button" data-action="lesson-next">Phần tiếp theo <span>→</span></button><button class="secondary-button" data-action="lesson-list">Danh sách phần</button></div>';
+    } else if (lessonSession.testing) {
+      endActions = '<div class="lesson-test-actions"><button class="primary-button" data-action="lesson-submit">Nộp bài kiểm tra <span>✓</span></button></div>';
+    } else {
+      endActions = '<button class="primary-button lesson-start-test" data-action="lesson-start">Bắt đầu kiểm tra 3 câu <span>→</span></button>';
+    }
+    const studyAction = lessonSession.testing ? "" : '<div class="lesson-test-intro"><p>Đọc xong phần này? Làm 3 câu hỏi ngắn để tự kiểm tra và xem giải thích ngay sau khi nộp.</p>' + endActions + '</div>';
+    const testSection = lessonSession.testing ? '<section class="lesson-check"><div class="lesson-check-heading"><div><span class="lesson-label">KIỂM TRA NHANH</span><h2>3 câu củng cố kiến thức</h2></div><span class="lesson-check-count">3 câu</span></div>' + questions + endActions + '</section>' : "";
+    return '<div class="view-top"><button class="back-button" data-action="lesson-list" aria-label="Quay lại danh sách phần">←</button><div><div class="view-kicker">CHƯƠNG ' + String(chapter.id).padStart(2, "0") + ' · PHẦN ' + String(number).padStart(2, "0") + '</div><h1 class="view-headline">' + escapeHtml(lesson.title) + '</h1></div></div>' +
+      '<article class="lesson-page"><div class="lesson-reading"><span class="lesson-label">BÀI GIẢNG</span><div class="lesson-body">' + escapeHtml(lesson.body).replace(/\n/g, "<br />") + '</div></div>' +
+      '<section class="lesson-example"><span class="lesson-label">VÍ DỤ MINH HỌA</span><p>' + escapeHtml(lesson.example) + '</p></section>' + studyAction + testSection + '</article>';
+  }
+
+  function submitLessonCheck() {
+    if (!lessonSession || lessonSession.submitted) return;
+    const chapter = chapterById(lessonSession.chapterId);
+    const lesson = window.IT1140_LESSONS[lessonSession.chapterId][lessonSession.lessonIndex];
+    const questions = lesson.checks.map((item, index) => ({
+      id: "lesson-" + lessonSession.chapterId + "-" + lessonSession.lessonIndex + "-" + index,
+      chapterId: lessonSession.chapterId,
+      level: "core",
+      prompt: item.prompt,
+      choices: item.choices,
+      answerIndex: item.answer,
+      selectedIndex: Object.prototype.hasOwnProperty.call(lessonSession.answers, index) ? lessonSession.answers[index] : null,
+      explanation: item.explanation,
+    }));
+    const correctCount = questions.filter((question) => question.selectedIndex === question.answerIndex).length;
+    const key = chapter.id + "-" + lessonSession.lessonIndex;
+    const previous = state.learningProgress[key] || {};
+    const completedAt = new Date().toISOString();
+    const lessonTitle = chapter.title + " · " + lesson.title;
+    state.learningProgress[key] = { completed: true, bestScore: Math.max(Number(previous.bestScore || 0), correctCount), attempts: Number(previous.attempts || 0) + 1, completedAt };
+    state.history.unshift({
+      id: typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : "lesson-" + Date.now(),
+      chapterId: chapter.id,
+      lessonIndex: lessonSession.lessonIndex,
+      lessonTitle,
+      mode: "lesson",
+      totalCount: questions.length,
+      completedAt,
+      durationSeconds: Math.round((Date.now() - lessonSession.startedAt) / 1000),
+      correctCount,
+      questions,
+    });
+    lessonSession.result = correctCount;
+    lessonSession.submitted = true;
+    saveState();
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function advanceLesson() {
+    if (!lessonSession) return;
+    const chapterId = lessonSession.chapterId;
+    const nextIndex = lessonSession.lessonIndex + 1;
+    const lessons = window.IT1140_LESSONS?.[chapterId] || [];
+    if (nextIndex < lessons.length) startLesson(chapterId, nextIndex);
+    else {
+      lessonSession = null;
+      window.currentTeachingChapter = chapterId;
+      screen = "lesson-list";
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
   function renderQuiz() {
     const chapter = chapterById(session.chapterId);
     const total = session.questions.length;
@@ -490,7 +636,9 @@
 
     const dateLabel = formatDate(attempt.completedAt);
     const sourceLabel = resultOrigin === "history" ? `LỊCH SỬ · ${dateLabel}` : "LƯỢT ÔN TẬP VỪA HOÀN THÀNH";
-    const retryButton = attempt.mode === "midterm" || Number(attempt.chapterId) === 0
+    const retryButton = attempt.mode === "lesson"
+      ? '<button class="primary-button compact" data-action="lesson-retry" data-id="' + attempt.chapterId + '" data-index="' + attempt.lessonIndex + '">Học lại phần này <span>↻</span></button>'
+      : attempt.mode === "midterm" || Number(attempt.chapterId) === 0
       ? `<button class="primary-button compact" data-action="midterm">Làm đề giữa kỳ mới <span>↻</span></button>`
       : attempt.mode === "mistakes"
         ? `<button class="primary-button compact" data-action="mistakes" data-id="${attempt.chapterId}">Ôn lỗi sai tiếp <span>↻</span></button>`
@@ -533,7 +681,7 @@
       const label = attemptLabel(attempt);
       return `
         <article class="history-row">
-          <div class="history-chapter"><span class="history-icon" style="background:${chapter?.soft || "#f1e8ff"};color:${chapter?.color || "#9a79c7"}">${chapter?.icon || "✦"}</span><div><strong>${escapeHtml(label)}</strong><small>${attempt.mode === "mistakes" ? "Ôn lỗi sai" : attempt.mode === "midterm" ? "Tổng hợp 6 chương" : "Luyện chương"} · ${escapeHtml(formatDate(attempt.completedAt))}</small></div></div>
+          <div class="history-chapter"><span class="history-icon" style="background:${chapter?.soft || "#f1e8ff"};color:${chapter?.color || "#9a79c7"}">${chapter?.icon || "✦"}</span><div><strong>${escapeHtml(label)}</strong><small>${attempt.mode === "lesson" ? "Giảng dạy · " + escapeHtml(attempt.lessonTitle || "") : attempt.mode === "mistakes" ? "Ôn lỗi sai" : attempt.mode === "midterm" ? "Tổng hợp 6 chương" : "Luyện chương"} · ${escapeHtml(formatDate(attempt.completedAt))}</small></div></div>
           <div class="history-meta"><span>Điểm số</span><strong>${score}/${total} · ${percent}%</strong></div>
           <div class="history-meta"><span>Thời gian</span><strong>${escapeHtml(formatDuration(attempt.durationSeconds))}</strong></div>
           <span class="score-pill ${percent < 50 ? "low" : ""}">${percent >= 70 ? "✿" : "✧"} ${score}/${total} · ${percent}%</span>
@@ -725,6 +873,17 @@
       return;
     }
 
+    if (action === "teach") { startTeaching(button.dataset.id); return; }
+    if (action === "open-lesson") { startLesson(button.dataset.id, button.dataset.index); return; }
+    if (action === "lesson-list") {
+      window.currentTeachingChapter = lessonSession?.chapterId || Number(window.currentTeachingChapter);
+      lessonSession = null; screen = "lesson-list"; render(); window.scrollTo({ top: 0, behavior: "smooth" }); return;
+    }
+    if (action === "lesson-start") { if (lessonSession) { lessonSession.testing = true; render(); window.scrollTo({ top: 0, behavior: "smooth" }); } return; }
+    if (action === "lesson-answer") { if (lessonSession && !lessonSession.submitted) { lessonSession.answers[Number(button.dataset.index)] = Number(button.dataset.choice); render(); } return; }
+    if (action === "lesson-submit") { submitLessonCheck(); return; }
+    if (action === "lesson-next") { advanceLesson(); return; }
+    if (action === "lesson-retry") { startLesson(button.dataset.id, button.dataset.index); lessonSession.testing = true; render(); return; }
     if (action === "home" || action === "history") {
       navigate(action);
       return;
