@@ -591,3 +591,33 @@ body[data-theme="kuromi"] .lesson-finish > div strong { color: #805294; }
   .lesson-finish { align-items: stretch; flex-direction: column; }
   .lesson-finish > div { margin: 0 0 3px; }
 }
+
+
+.lesson-knowledge {
+  margin: 0 0 22px;
+  padding: 19px 22px;
+  border: 1px solid #e7eef3;
+  border-radius: 17px;
+  background: linear-gradient(135deg, rgba(247,252,255,.94), rgba(255,248,251,.92));
+}
+.lesson-knowledge ul {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding-left: 19px;
+  color: #61596a;
+}
+.lesson-knowledge li {
+  padding-left: 4px;
+  font-size: 12px;
+  line-height: 1.85;
+}
+body[data-theme="kuromi"] .lesson-knowledge {
+  border-color: #e9dcf1;
+  background: linear-gradient(135deg, rgba(250,246,255,.95), rgba(255,248,252,.92));
+}
+body[data-theme="kuromi"] .lesson-knowledge ul { color: #665b70; }
+@media (max-width: 540px) {
+  .lesson-knowledge { padding: 16px; }
+  .lesson-knowledge li { font-size: 11px; }
+}
