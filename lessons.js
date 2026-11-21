@@ -6,8 +6,12 @@ window.IT1140_LESSONS = {
       "body": "Dữ liệu là các ký hiệu, con số hoặc phép đo thô; thông tin là dữ liệu được đặt vào ngữ cảnh để trả lời câu hỏi có ý nghĩa. Quá trình xử lý thường gồm thu thập, lưu trữ, xử lý và tạo thông tin phục vụ quyết định.",
       "example": "Số 100 chỉ là dữ liệu. Nhiệt độ nước là 100°C là thông tin vì đã có đơn vị và ngữ cảnh.",
       "topicTags": [
-        "Dữ liệu",
-        "WKID"
+        "Dữ liệu và thông tin"
+      ],
+      "questionIds": [
+        "c1-01",
+        "c1-19",
+        "c1-d01"
       ]
     },
     {
@@ -17,6 +21,11 @@ window.IT1140_LESSONS = {
       "example": "Bảng điểm là dữ liệu; điểm trung bình là thông tin; nhận ra học phần nào cần ôn là tri thức; lập kế hoạch ôn hợp lý là trí tuệ.",
       "topicTags": [
         "WKID"
+      ],
+      "questionIds": [
+        "c1-02",
+        "c1-x01",
+        "c1-d07"
       ]
     },
     {
@@ -25,7 +34,12 @@ window.IT1140_LESSONS = {
       "body": "Dữ liệu có thể đến từ số đo, chữ viết, âm thanh, ảnh và các thông số vật lý. Máy tính lưu dữ liệu dưới dạng nhị phân, nên tín hiệu tự nhiên phải được mã hóa hoặc số hóa theo cách phù hợp.",
       "example": "Nhiệt độ từ cảm biến được lấy mẫu, đổi thành giá trị số rồi mã hóa để lưu trong máy tính.",
       "topicTags": [
-        "Dữ liệu"
+        "Nguồn dữ liệu"
+      ],
+      "questionIds": [
+        "c1-d02",
+        "c1-06",
+        "c1-x02"
       ]
     },
     {
@@ -34,10 +48,12 @@ window.IT1140_LESSONS = {
       "body": "Slide phân biệt các kiểu dữ liệu cơ bản như số nguyên, số thực và ký tự. Mỗi kiểu có miền giá trị, cách biểu diễn và phép xử lý phù hợp; không nên xem chuỗi ký tự là số chỉ vì nó trông giống chữ số.",
       "example": "25 có thể là số nguyên để tính toán; mã phòng 25 có thể là chuỗi ký tự nếu cần giữ nguyên như định danh.",
       "topicTags": [
-        "Dữ liệu",
-        "Số nguyên",
-        "Số thực",
-        "Ký tự"
+        "Dữ liệu cơ bản"
+      ],
+      "questionIds": [
+        "c1-d04",
+        "c1-d03",
+        "c1-d05"
       ]
     },
     {
@@ -46,7 +62,12 @@ window.IT1140_LESSONS = {
       "body": "Dữ liệu có cấu trúc ghép nhiều giá trị cơ bản theo một tổ chức, chẳng hạn xâu ký tự, mảng hoặc bản ghi. Cấu trúc giúp lưu và truy cập một nhóm giá trị theo quy tắc.",
       "example": "Một bản ghi sinh viên có thể gồm mã số, họ tên, năm sinh và điểm; mỗi trường có kiểu dữ liệu phù hợp.",
       "topicTags": [
-        "Dữ liệu"
+        "Dữ liệu có cấu trúc"
+      ],
+      "questionIds": [
+        "c1-d06",
+        "c1-x03",
+        "c1-27"
       ]
     },
     {
@@ -56,6 +77,13 @@ window.IT1140_LESSONS = {
       "example": "1 KB = 1024 B; 1 MB = 1024 KB. Tệp 2 MB có 2048 KB theo quy ước này.",
       "topicTags": [
         "Đơn vị"
+      ],
+      "questionIds": [
+        "c1-x04",
+        "c1-25",
+        "c1-04",
+        "c1-24",
+        "c1-x24"
       ]
     },
     {
@@ -65,6 +93,12 @@ window.IT1140_LESSONS = {
       "example": "Trong 325₁₀, chữ số 3 ở hàng trăm góp 3×10²; trong 101₂, giá trị là 1×2² + 0×2 + 1 = 5.",
       "topicTags": [
         "Hệ cơ số"
+      ],
+      "questionIds": [
+        "c1-x05",
+        "c1-x06",
+        "c1-05",
+        "c1-18"
       ]
     },
     {
@@ -74,6 +108,15 @@ window.IT1140_LESSONS = {
       "example": "1010₂ viết gọn thành A₁₆; nhóm 3 bit 101₂ tương ứng 5₈.",
       "topicTags": [
         "Hệ cơ số"
+      ],
+      "questionIds": [
+        "c1-03",
+        "c1-05",
+        "c1-09",
+        "c1-10",
+        "c1-12",
+        "c1-22",
+        "c1-x07"
       ]
     },
     {
@@ -83,6 +126,14 @@ window.IT1140_LESSONS = {
       "example": "1101.1₂ = 1×2³ + 1×2² + 0×2 + 1 + 1×2⁻¹ = 13.5₁₀.",
       "topicTags": [
         "Hệ cơ số"
+      ],
+      "questionIds": [
+        "c1-07",
+        "c1-30",
+        "c1-31",
+        "c1-x10",
+        "c1-x06",
+        "c1-18"
       ]
     },
     {
@@ -92,6 +143,11 @@ window.IT1140_LESSONS = {
       "example": "13₁₀ chia 2 cho các số dư 1, 0, 1, 1; đọc ngược được 1101₂.",
       "topicTags": [
         "Hệ cơ số"
+      ],
+      "questionIds": [
+        "c1-x08",
+        "c1-d08",
+        "c1-d09"
       ]
     },
     {
@@ -101,6 +157,11 @@ window.IT1140_LESSONS = {
       "example": "0.625×2=1.25 ghi 1; lấy 0.25×2=0.5 ghi 0; 0.5×2=1 ghi 1, vậy 0.625₁₀=0.101₂.",
       "topicTags": [
         "Hệ cơ số"
+      ],
+      "questionIds": [
+        "c1-x09",
+        "c1-13",
+        "c1-d10"
       ]
     },
     {
@@ -110,6 +171,11 @@ window.IT1140_LESSONS = {
       "example": "11110110₂ chia nhóm 4 bit thành 1111 0110, tương ứng F6₁₆.",
       "topicTags": [
         "Hệ cơ số"
+      ],
+      "questionIds": [
+        "c1-09",
+        "c1-10",
+        "c1-12"
       ]
     },
     {
@@ -119,6 +185,11 @@ window.IT1140_LESSONS = {
       "example": "8 bit không dấu có miền 0…255; cộng 250+10 vượt 255 nên không thể biểu diễn chính xác trong 8 bit.",
       "topicTags": [
         "Số nguyên"
+      ],
+      "questionIds": [
+        "c1-08",
+        "c1-28",
+        "c1-32"
       ]
     },
     {
@@ -128,6 +199,13 @@ window.IT1140_LESSONS = {
       "example": "Với 8 bit, 5 là 00000101; đảo bit thành 11111010 rồi cộng 1, được −5 = 11111011.",
       "topicTags": [
         "Số nguyên"
+      ],
+      "questionIds": [
+        "c1-11",
+        "c1-14",
+        "c1-20",
+        "c1-29",
+        "c1-x11"
       ]
     },
     {
@@ -137,6 +215,13 @@ window.IT1140_LESSONS = {
       "example": "Với số có dấu 8 bit, 120+20 vượt 127 nên xảy ra tràn dù phép cộng nhị phân vẫn tạo ra một mẫu bit.",
       "topicTags": [
         "Số nguyên"
+      ],
+      "questionIds": [
+        "c1-15",
+        "c1-21",
+        "c1-x12",
+        "c1-x13",
+        "c1-x14"
       ]
     },
     {
@@ -146,6 +231,11 @@ window.IT1140_LESSONS = {
       "example": "1011₂×11₂ tương đương 11×3=33₁₀, tức 100001₂.",
       "topicTags": [
         "Số nguyên"
+      ],
+      "questionIds": [
+        "c1-d11",
+        "c1-d12",
+        "c1-d13"
       ]
     },
     {
@@ -155,6 +245,11 @@ window.IT1140_LESSONS = {
       "example": "1010 AND 1100 = 1000; các phép logic thường dùng để kiểm tra hoặc đặt cờ bit.",
       "topicTags": [
         "Phép logic"
+      ],
+      "questionIds": [
+        "c1-x15",
+        "c1-x16",
+        "c1-x17"
       ]
     },
     {
@@ -164,6 +259,12 @@ window.IT1140_LESSONS = {
       "example": "Muốn biểu diễn một số dương, chuẩn hóa nó thành dạng 1.x×2ᵉ, sau đó mã hóa dấu, số mũ lệch và phần định trị.",
       "topicTags": [
         "Số thực"
+      ],
+      "questionIds": [
+        "c1-17",
+        "c1-x18",
+        "c1-x19",
+        "c1-16"
       ]
     },
     {
@@ -173,6 +274,12 @@ window.IT1140_LESSONS = {
       "example": "0.1₁₀ có thể được lưu thành một giá trị nhị phân gần đúng; vì vậy phép cộng số thực đôi khi có sai số rất nhỏ.",
       "topicTags": [
         "Số thực"
+      ],
+      "questionIds": [
+        "c1-33",
+        "c1-34",
+        "c1-x20",
+        "c1-x23"
       ]
     },
     {
@@ -182,6 +289,12 @@ window.IT1140_LESSONS = {
       "example": "Ký tự A có mã ASCII 65; Unicode biểu diễn được ký tự tiếng Việt như ế mà ASCII chuẩn không có.",
       "topicTags": [
         "Ký tự"
+      ],
+      "questionIds": [
+        "c1-23",
+        "c1-26",
+        "c1-x21",
+        "c1-x22"
       ]
     }
   ],
@@ -193,6 +306,15 @@ window.IT1140_LESSONS = {
       "example": "Máy bán hàng nhận mã sản phẩm, tra giá và tính tổng tiền rồi hiển thị kết quả.",
       "topicTags": [
         "Phần cứng"
+      ],
+      "questionIds": [
+        "c2-25",
+        "c2-x01",
+        "c2-d05",
+        "c2-02",
+        "c2-x03",
+        "c2-01",
+        "c2-x02"
       ]
     },
     {
@@ -205,6 +327,16 @@ window.IT1140_LESSONS = {
         "Bus",
         "Bộ nhớ",
         "Vào-ra"
+      ],
+      "questionIds": [
+        "c2-25",
+        "c2-08",
+        "c2-19",
+        "c2-23",
+        "c2-x01",
+        "c2-x24",
+        "c2-d01",
+        "c2-02"
       ]
     },
     {
@@ -214,6 +346,15 @@ window.IT1140_LESSONS = {
       "example": "Trong phép cộng, CU giải mã lệnh, ALU cộng hai giá trị trong thanh ghi rồi CPU ghi kết quả.",
       "topicTags": [
         "Phần cứng"
+      ],
+      "questionIds": [
+        "c2-01",
+        "c2-25",
+        "c2-02",
+        "c2-x01",
+        "c2-d05",
+        "c2-x03",
+        "c2-x02"
       ]
     },
     {
@@ -223,6 +364,11 @@ window.IT1140_LESSONS = {
       "example": "Hai CPU cùng 3 GHz có thể chạy bài toán khác nhau với thời gian khác nhau do kiến trúc và số lõi.",
       "topicTags": [
         "Phần cứng"
+      ],
+      "questionIds": [
+        "c2-x02",
+        "c2-x03",
+        "c2-d05"
       ]
     },
     {
@@ -232,6 +378,16 @@ window.IT1140_LESSONS = {
       "example": "CPU thường tìm dữ liệu trong cache trước, rồi RAM; nếu dữ liệu chưa ở RAM, hệ thống mới đọc từ SSD.",
       "topicTags": [
         "Bộ nhớ"
+      ],
+      "questionIds": [
+        "c2-19",
+        "c2-03",
+        "c2-x04",
+        "c2-x24",
+        "c2-28",
+        "c2-23",
+        "c2-x05",
+        "c2-27"
       ]
     },
     {
@@ -241,6 +397,16 @@ window.IT1140_LESSONS = {
       "example": "Tắt máy làm mất nội dung RAM chưa lưu, còn tệp đã ghi xuống SSD vẫn còn.",
       "topicTags": [
         "Bộ nhớ"
+      ],
+      "questionIds": [
+        "c2-19",
+        "c2-03",
+        "c2-x24",
+        "c2-28",
+        "c2-23",
+        "c2-x04",
+        "c2-27",
+        "c2-x05"
       ]
     },
     {
@@ -251,6 +417,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Bộ nhớ",
         "Tệp"
+      ],
+      "questionIds": [
+        "c2-19",
+        "c2-x24",
+        "c2-03",
+        "c2-24",
+        "c2-10",
+        "c2-27",
+        "c2-x04",
+        "c2-x05"
       ]
     },
     {
@@ -260,6 +436,11 @@ window.IT1140_LESSONS = {
       "example": "Bàn phím mã hóa phím bấm thành dữ liệu vào; màn hình biến dữ liệu đồ họa thành điểm ảnh.",
       "topicTags": [
         "Vào-ra"
+      ],
+      "questionIds": [
+        "c2-05",
+        "c2-26",
+        "c2-d01"
       ]
     },
     {
@@ -269,6 +450,11 @@ window.IT1140_LESSONS = {
       "example": "Bộ điều khiển USB nhận yêu cầu từ CPU rồi quản lý truyền dữ liệu tới bàn phím hoặc ổ flash.",
       "topicTags": [
         "Vào-ra"
+      ],
+      "questionIds": [
+        "c2-15",
+        "c2-x07",
+        "c2-d01"
       ]
     },
     {
@@ -278,6 +464,14 @@ window.IT1140_LESSONS = {
       "example": "CPU đặt địa chỉ ô nhớ trên bus địa chỉ, phát tín hiệu đọc trên bus điều khiển và nhận dữ liệu qua bus dữ liệu.",
       "topicTags": [
         "Bus"
+      ],
+      "questionIds": [
+        "c2-11",
+        "c2-08",
+        "c2-x08",
+        "c2-13",
+        "c2-07",
+        "c2-33"
       ]
     },
     {
@@ -287,6 +481,12 @@ window.IT1140_LESSONS = {
       "example": "Hệ điều hành là phần mềm hệ thống; trình duyệt và phần mềm bảng tính là phần mềm ứng dụng.",
       "topicTags": [
         "Phần mềm"
+      ],
+      "questionIds": [
+        "c2-x09",
+        "c2-d02",
+        "c2-04",
+        "c2-d03"
       ]
     },
     {
@@ -296,6 +496,11 @@ window.IT1140_LESSONS = {
       "example": "ADD AX, BX dễ đọc hơn mã máy 01D8, nhưng assembler phải chuyển hợp ngữ thành mã máy.",
       "topicTags": [
         "Ngôn ngữ"
+      ],
+      "questionIds": [
+        "c2-x11",
+        "c2-22",
+        "c2-x10"
       ]
     },
     {
@@ -305,6 +510,11 @@ window.IT1140_LESSONS = {
       "example": "Khi mở ứng dụng, hệ điều hành nạp chương trình vào RAM, cấp thời gian CPU và cho phép ứng dụng đọc tệp.",
       "topicTags": [
         "Hệ điều hành"
+      ],
+      "questionIds": [
+        "c2-14",
+        "c2-d04",
+        "c2-x12"
       ]
     },
     {
@@ -314,6 +524,14 @@ window.IT1140_LESSONS = {
       "example": "Tệp baitap.pdf nằm trong thư mục Hoc; mẫu *.pdf có thể đại diện cho các tệp PDF.",
       "topicTags": [
         "Tệp"
+      ],
+      "questionIds": [
+        "c2-24",
+        "c2-29",
+        "c2-x13",
+        "c2-10",
+        "c2-30",
+        "c2-18"
       ]
     },
     {
@@ -324,6 +542,14 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Giao diện",
         "Hệ điều hành"
+      ],
+      "questionIds": [
+        "c2-21",
+        "c2-x14",
+        "c2-34",
+        "c2-14",
+        "c2-d04",
+        "c2-x12"
       ]
     },
     {
@@ -333,6 +559,15 @@ window.IT1140_LESSONS = {
       "example": "Router chuyển tiếp lưu lượng giữa mạng gia đình và Internet; access point cung cấp kết nối Wi‑Fi.",
       "topicTags": [
         "Mạng"
+      ],
+      "questionIds": [
+        "c2-09",
+        "c2-13",
+        "c2-20",
+        "c2-x15",
+        "c2-x17",
+        "c2-x23",
+        "c2-x16"
       ]
     },
     {
@@ -342,6 +577,12 @@ window.IT1140_LESSONS = {
       "example": "Wi‑Fi và cáp Ethernet là công nghệ truy nhập khác nhau; cả hai có thể mang gói IP theo các quy tắc mạng.",
       "topicTags": [
         "Mạng"
+      ],
+      "questionIds": [
+        "c2-x18",
+        "c2-x19",
+        "c2-x20",
+        "c2-d06"
       ]
     },
     {
@@ -351,6 +592,15 @@ window.IT1140_LESSONS = {
       "example": "Mạng LAN trong tòa nhà có phạm vi hẹp; WAN liên kết các mạng ở khoảng cách địa lý lớn.",
       "topicTags": [
         "Mạng"
+      ],
+      "questionIds": [
+        "c2-06",
+        "c2-12",
+        "c2-16",
+        "c2-17",
+        "c2-31",
+        "c2-x21",
+        "c2-x22"
       ]
     }
   ],
@@ -362,6 +612,11 @@ window.IT1140_LESSONS = {
       "example": "Điện thoại dùng 5G và laptop dùng Wi‑Fi có thể cùng truy cập một máy chủ web qua Internet.",
       "topicTags": [
         "Internet"
+      ],
+      "questionIds": [
+        "c3-01",
+        "c3-30",
+        "c3-d13"
       ]
     },
     {
@@ -370,7 +625,12 @@ window.IT1140_LESSONS = {
       "body": "IoT là hệ thống thiết bị vật lý có khả năng thu thập, xử lý và trao đổi dữ liệu qua mạng, thường cần ít can thiệp của con người. Phần này đặt IoT trong bức tranh kết nối Internet.",
       "example": "Đồng hồ thông minh gửi số đo nhịp tim tới điện thoại để người dùng xem xu hướng.",
       "topicTags": [
-        "Internet"
+        "IoT"
+      ],
+      "questionIds": [
+        "c3-d08",
+        "c3-d09",
+        "c3-d10"
       ]
     },
     {
@@ -380,6 +640,11 @@ window.IT1140_LESSONS = {
       "example": "Sự chuyển đổi sang TCP/IP năm 1983 là mốc quan trọng để các mạng kết nối theo bộ giao thức chung.",
       "topicTags": [
         "Lịch sử Internet"
+      ],
+      "questionIds": [
+        "c3-x01",
+        "c3-x02",
+        "c3-d01"
       ]
     },
     {
@@ -389,6 +654,11 @@ window.IT1140_LESSONS = {
       "example": "Điện thoại là thiết bị biên; router của nhà mạng thuộc hạ tầng chuyển tiếp sâu hơn trong mạng.",
       "topicTags": [
         "Kiến trúc mạng"
+      ],
+      "questionIds": [
+        "c3-x03",
+        "c3-x04",
+        "c3-d02"
       ]
     },
     {
@@ -398,6 +668,11 @@ window.IT1140_LESSONS = {
       "example": "Laptop kết nối router qua Wi‑Fi, còn máy bàn có thể dùng Ethernet tới cùng router.",
       "topicTags": [
         "Truy nhập Internet"
+      ],
+      "questionIds": [
+        "c3-x06",
+        "c3-d11",
+        "c3-d12"
       ]
     },
     {
@@ -407,6 +682,11 @@ window.IT1140_LESSONS = {
       "example": "Nhà dùng GPON cho đường truyền cố định; điện thoại dùng 4G khi đang di chuyển ngoài vùng Wi‑Fi.",
       "topicTags": [
         "Truy nhập Internet"
+      ],
+      "questionIds": [
+        "c3-x05",
+        "c3-d03",
+        "c3-d12"
       ]
     },
     {
@@ -416,6 +696,11 @@ window.IT1140_LESSONS = {
       "example": "Khi tải một tệp, các gói có thể đi qua nhiều router; TCP giúp phát hiện phần thiếu và yêu cầu gửi lại.",
       "topicTags": [
         "Internet"
+      ],
+      "questionIds": [
+        "c3-07",
+        "c3-30",
+        "c3-d13"
       ]
     },
     {
@@ -426,6 +711,11 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Internet",
         "Kiến trúc mạng"
+      ],
+      "questionIds": [
+        "c3-07",
+        "c3-27",
+        "c3-d14"
       ]
     },
     {
@@ -435,6 +725,12 @@ window.IT1140_LESSONS = {
       "example": "Trình duyệt yêu cầu trang chủ từ máy chủ, nhận HTML, CSS và hình ảnh rồi hiển thị trang.",
       "topicTags": [
         "Web"
+      ],
+      "questionIds": [
+        "c3-08",
+        "c3-17",
+        "c3-26",
+        "c3-x07"
       ]
     },
     {
@@ -444,6 +740,13 @@ window.IT1140_LESSONS = {
       "example": "Ứng dụng email gửi thư tới máy chủ; máy chủ chuyển thư tới hộp thư của người nhận.",
       "topicTags": [
         "Email"
+      ],
+      "questionIds": [
+        "c3-10",
+        "c3-19",
+        "c3-21",
+        "c3-25",
+        "c3-x08"
       ]
     },
     {
@@ -453,6 +756,11 @@ window.IT1140_LESSONS = {
       "example": "Ứng dụng gửi thư qua SMTP nhưng đồng bộ hộp thư đến bằng IMAP.",
       "topicTags": [
         "Email"
+      ],
+      "questionIds": [
+        "c3-03",
+        "c3-09",
+        "c3-x09"
       ]
     },
     {
@@ -462,6 +770,11 @@ window.IT1140_LESSONS = {
       "example": "Khi nhập www.example.com, DNS giúp tìm địa chỉ IP để trình duyệt kết nối đúng máy chủ.",
       "topicTags": [
         "DNS"
+      ],
+      "questionIds": [
+        "c3-02",
+        "c3-x10",
+        "c3-d07"
       ]
     },
     {
@@ -471,6 +784,12 @@ window.IT1140_LESSONS = {
       "example": "Dịch vụ lưu trữ ảnh trực tuyến cho phép tải ảnh lên, đồng bộ và xem từ nhiều thiết bị.",
       "topicTags": [
         "Cloud"
+      ],
+      "questionIds": [
+        "c3-05",
+        "c3-x11",
+        "c3-x12",
+        "c3-x13"
       ]
     },
     {
@@ -480,6 +799,11 @@ window.IT1140_LESSONS = {
       "example": "Một lớp học có thể dùng cloud để chia sẻ bài; khi mất Internet, quyền truy cập và đồng bộ bị hạn chế.",
       "topicTags": [
         "Cloud"
+      ],
+      "questionIds": [
+        "c3-29",
+        "c3-34",
+        "c3-14"
       ]
     },
     {
@@ -489,6 +813,12 @@ window.IT1140_LESSONS = {
       "example": "Phần mềm chưa cập nhật có thể chứa lỗ hổng mà kẻ tấn công khai thác để đọc dữ liệu trái phép.",
       "topicTags": [
         "An toàn"
+      ],
+      "questionIds": [
+        "c3-04",
+        "c3-22",
+        "c3-28",
+        "c3-x14"
       ]
     },
     {
@@ -498,6 +828,12 @@ window.IT1140_LESSONS = {
       "example": "Tấn công từ chối dịch vụ gửi lượng yêu cầu lớn để người dùng hợp pháp không truy cập được dịch vụ.",
       "topicTags": [
         "An toàn"
+      ],
+      "questionIds": [
+        "c3-11",
+        "c3-31",
+        "c3-x15",
+        "c3-x16"
       ]
     },
     {
@@ -508,6 +844,12 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "An toàn",
         "Xác thực"
+      ],
+      "questionIds": [
+        "c3-06",
+        "c3-13",
+        "c3-x17",
+        "c3-20"
       ]
     },
     {
@@ -518,6 +860,14 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "An toàn",
         "Xác thực"
+      ],
+      "questionIds": [
+        "c3-16",
+        "c3-24",
+        "c3-32",
+        "c3-33",
+        "c3-x19",
+        "c3-x20"
       ]
     },
     {
@@ -528,6 +878,11 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Mã hóa",
         "An toàn"
+      ],
+      "questionIds": [
+        "c3-12",
+        "c3-15",
+        "c3-x18"
       ]
     },
     {
@@ -539,6 +894,13 @@ window.IT1140_LESSONS = {
         "An toàn",
         "Xác thực",
         "Email"
+      ],
+      "questionIds": [
+        "c3-17",
+        "c3-20",
+        "c3-x21",
+        "c3-x22",
+        "c3-13"
       ]
     },
     {
@@ -548,6 +910,12 @@ window.IT1140_LESSONS = {
       "example": "Xin phép trước khi đăng ảnh có thông tin riêng tư của bạn bè là cách tôn trọng quyền riêng tư.",
       "topicTags": [
         "Đạo đức số"
+      ],
+      "questionIds": [
+        "c3-x23",
+        "c3-23",
+        "c3-d04",
+        "c3-d05"
       ]
     },
     {
@@ -556,8 +924,12 @@ window.IT1140_LESSONS = {
       "body": "Tác phẩm trên Internet vẫn có thể được bảo hộ bản quyền. Trích dẫn, xin phép và tuân thủ giấy phép sử dụng giúp tránh sao chép hoặc phân phối trái phép.",
       "example": "Dùng ảnh Creative Commons cần kiểm tra điều kiện ghi nguồn và quyền sử dụng thương mại.",
       "topicTags": [
-        "Bản quyền",
-        "Đạo đức số"
+        "Bản quyền"
+      ],
+      "questionIds": [
+        "c3-x24",
+        "c3-d06",
+        "c3-d15"
       ]
     }
   ],
@@ -572,6 +944,16 @@ window.IT1140_LESSONS = {
         "IoT và Edge",
         "Big Data",
         "Blockchain"
+      ],
+      "questionIds": [
+        "c4-11",
+        "c4-26",
+        "c4-31",
+        "c4-21",
+        "c4-d07",
+        "c4-17",
+        "c4-23",
+        "c4-29"
       ]
     },
     {
@@ -581,6 +963,11 @@ window.IT1140_LESSONS = {
       "example": "CPU điều phối ứng dụng, xử lý lệnh hệ điều hành và giao việc chuyên biệt cho GPU/NPU khi cần.",
       "topicTags": [
         "AI phần cứng"
+      ],
+      "questionIds": [
+        "c4-25",
+        "c4-d01",
+        "c4-d02"
       ]
     },
     {
@@ -590,6 +977,11 @@ window.IT1140_LESSONS = {
       "example": "Một GPU có thể xử lý nhiều pixel hoặc phép nhân ma trận đồng thời, phù hợp với huấn luyện mô hình.",
       "topicTags": [
         "AI phần cứng"
+      ],
+      "questionIds": [
+        "c4-01",
+        "c4-x01",
+        "c4-32"
       ]
     },
     {
@@ -599,6 +991,11 @@ window.IT1140_LESSONS = {
       "example": "Điện thoại dùng NPU để nhận diện khuôn mặt nhanh và ít tiêu thụ pin hơn khi xử lý trực tiếp.",
       "topicTags": [
         "AI phần cứng"
+      ],
+      "questionIds": [
+        "c4-02",
+        "c4-x02",
+        "c4-d03"
       ]
     },
     {
@@ -608,6 +1005,12 @@ window.IT1140_LESSONS = {
       "example": "Một ứng dụng có thể dùng CPU điều phối, GPU huấn luyện mạng và NPU chạy nhận diện trên điện thoại.",
       "topicTags": [
         "AI phần cứng"
+      ],
+      "questionIds": [
+        "c4-24",
+        "c4-d04",
+        "c4-25",
+        "c4-01"
       ]
     },
     {
@@ -619,6 +1022,11 @@ window.IT1140_LESSONS = {
         "Machine Learning",
         "Deep Learning",
         "AI"
+      ],
+      "questionIds": [
+        "c4-03",
+        "c4-x03",
+        "c4-x07"
       ]
     },
     {
@@ -628,6 +1036,11 @@ window.IT1140_LESSONS = {
       "example": "Dữ liệu email được gắn nhãn spam/không spam giúp mô hình học cách phân loại email mới.",
       "topicTags": [
         "Machine Learning"
+      ],
+      "questionIds": [
+        "c4-04",
+        "c4-x04",
+        "c4-d05"
       ]
     },
     {
@@ -637,6 +1050,11 @@ window.IT1140_LESSONS = {
       "example": "Mô hình nhóm khách hàng theo hành vi mua sắm mà không được cho nhãn nhóm từ đầu.",
       "topicTags": [
         "Machine Learning"
+      ],
+      "questionIds": [
+        "c4-05",
+        "c4-x05",
+        "c4-d06"
       ]
     },
     {
@@ -646,6 +1064,11 @@ window.IT1140_LESSONS = {
       "example": "Robot thử nhiều đường đi; đường tới đích an toàn nhận điểm thưởng cao hơn.",
       "topicTags": [
         "Machine Learning"
+      ],
+      "questionIds": [
+        "c4-06",
+        "c4-x06",
+        "c4-19"
       ]
     },
     {
@@ -656,6 +1079,11 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Deep Learning",
         "Machine Learning"
+      ],
+      "questionIds": [
+        "c4-x03",
+        "c4-x07",
+        "c4-03"
       ]
     },
     {
@@ -666,6 +1094,12 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "AI tạo sinh",
         "LLM"
+      ],
+      "questionIds": [
+        "c4-07",
+        "c4-08",
+        "c4-x08",
+        "c4-x09"
       ]
     },
     {
@@ -676,6 +1110,12 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "AI",
         "AI ethics"
+      ],
+      "questionIds": [
+        "c4-09",
+        "c4-x10",
+        "c4-x11",
+        "c4-x12"
       ]
     },
     {
@@ -686,6 +1126,11 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "IoT",
         "IoT và Edge"
+      ],
+      "questionIds": [
+        "c4-11",
+        "c4-26",
+        "c4-x13"
       ]
     },
     {
@@ -695,6 +1140,11 @@ window.IT1140_LESSONS = {
       "example": "Camera phân tích mọi khung hình trên cloud có thể chậm nếu mạng yếu và truyền quá nhiều video.",
       "topicTags": [
         "IoT và Edge"
+      ],
+      "questionIds": [
+        "c4-d07",
+        "c4-13",
+        "c4-31"
       ]
     },
     {
@@ -705,6 +1155,12 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Edge",
         "IoT và Edge"
+      ],
+      "questionIds": [
+        "c4-13",
+        "c4-x14",
+        "c4-29",
+        "c4-31"
       ]
     },
     {
@@ -714,6 +1170,15 @@ window.IT1140_LESSONS = {
       "example": "Dữ liệu xe buýt trực tiếp tăng nhanh theo thời gian, có cả tọa độ và cảm biến nên cần xử lý tốc độ và đa dạng.",
       "topicTags": [
         "Big Data"
+      ],
+      "questionIds": [
+        "c4-10",
+        "c4-18",
+        "c4-21",
+        "c4-x15",
+        "c4-27",
+        "c4-28",
+        "c4-33"
       ]
     },
     {
@@ -723,6 +1188,11 @@ window.IT1140_LESSONS = {
       "example": "Tổ chức lưu log, ảnh và bảng trong Data Lake rồi trích xuất tập cần dùng cho phân tích.",
       "topicTags": [
         "Big Data"
+      ],
+      "questionIds": [
+        "c4-14",
+        "c4-x16",
+        "c4-d08"
       ]
     },
     {
@@ -732,6 +1202,12 @@ window.IT1140_LESSONS = {
       "example": "Map có thể đếm từ trong từng phần tệp; Reduce cộng các bộ đếm từ các máy thành tổng.",
       "topicTags": [
         "Big Data"
+      ],
+      "questionIds": [
+        "c4-15",
+        "c4-16",
+        "c4-x17",
+        "c4-x18"
       ]
     },
     {
@@ -742,6 +1218,12 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Big Data",
         "AI"
+      ],
+      "questionIds": [
+        "c4-x19",
+        "c4-x20",
+        "c4-d09",
+        "c4-33"
       ]
     },
     {
@@ -751,6 +1233,16 @@ window.IT1140_LESSONS = {
       "example": "Nếu nội dung một khối bị sửa, mã băm thay đổi và liên kết với các khối sau không còn khớp.",
       "topicTags": [
         "Blockchain"
+      ],
+      "questionIds": [
+        "c4-34",
+        "c4-x21",
+        "c4-12",
+        "c4-17",
+        "c4-23",
+        "c4-30",
+        "c4-x23",
+        "c4-x22"
       ]
     },
     {
@@ -760,6 +1252,11 @@ window.IT1140_LESSONS = {
       "example": "Nếu nguồn dữ liệu khai sai, các nút vẫn có thể đồng thuận ghi nhận thông tin sai đó.",
       "topicTags": [
         "Blockchain"
+      ],
+      "questionIds": [
+        "c4-30",
+        "c4-x22",
+        "c4-x21"
       ]
     },
     {
@@ -769,6 +1266,12 @@ window.IT1140_LESSONS = {
       "example": "Hợp đồng thông minh có thể giải ngân khi đủ chữ ký; lỗi trong mã vẫn có thể gây hậu quả.",
       "topicTags": [
         "Blockchain"
+      ],
+      "questionIds": [
+        "c4-22",
+        "c4-x24",
+        "c4-34",
+        "c4-17"
       ]
     }
   ],
@@ -780,6 +1283,16 @@ window.IT1140_LESSONS = {
       "example": "Bài toán tính điểm trung bình cần chốt đầu vào, công thức, cách xử lý dữ liệu thiếu, rồi mới cài đặt và kiểm thử.",
       "topicTags": [
         "Giải quyết bài toán"
+      ],
+      "questionIds": [
+        "c5-24",
+        "c5-01",
+        "c5-x02",
+        "c5-x03",
+        "c5-12",
+        "c5-x01",
+        "c5-27",
+        "c5-28"
       ]
     },
     {
@@ -789,6 +1302,16 @@ window.IT1140_LESSONS = {
       "example": "Tìm ƯSCLN: đầu vào là hai số nguyên dương; đầu ra là số dương lớn nhất cùng chia hết cho cả hai.",
       "topicTags": [
         "Giải quyết bài toán"
+      ],
+      "questionIds": [
+        "c5-28",
+        "c5-01",
+        "c5-12",
+        "c5-x01",
+        "c5-x03",
+        "c5-24",
+        "c5-27",
+        "c5-x02"
       ]
     },
     {
@@ -798,6 +1321,16 @@ window.IT1140_LESSONS = {
       "example": "Sắp xếp ít phần tử có thể dùng cách đơn giản; dữ liệu lớn cần cân nhắc số phép so sánh và bộ nhớ.",
       "topicTags": [
         "Giải quyết bài toán"
+      ],
+      "questionIds": [
+        "c5-x01",
+        "c5-12",
+        "c5-x03",
+        "c5-24",
+        "c5-x02",
+        "c5-01",
+        "c5-28",
+        "c5-27"
       ]
     },
     {
@@ -808,6 +1341,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Thuật toán",
         "Đặc trưng thuật toán"
+      ],
+      "questionIds": [
+        "c5-20",
+        "c5-07",
+        "c5-08",
+        "c5-25",
+        "c5-02",
+        "c5-11",
+        "c5-x05",
+        "c5-x06"
       ]
     },
     {
@@ -818,6 +1361,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Đặc trưng thuật toán",
         "Thuật toán"
+      ],
+      "questionIds": [
+        "c5-20",
+        "c5-08",
+        "c5-07",
+        "c5-02",
+        "c5-25",
+        "c5-11",
+        "c5-x06",
+        "c5-x05"
       ]
     },
     {
@@ -827,6 +1380,16 @@ window.IT1140_LESSONS = {
       "example": "Dùng lưu đồ để trao đổi luồng rẽ nhánh; chuyển sang mã giả trước khi viết Python.",
       "topicTags": [
         "Biểu diễn thuật toán"
+      ],
+      "questionIds": [
+        "c5-10",
+        "c5-26",
+        "c5-04",
+        "c5-03",
+        "c5-30",
+        "c5-21",
+        "c5-09",
+        "c5-05"
       ]
     },
     {
@@ -836,6 +1399,16 @@ window.IT1140_LESSONS = {
       "example": "Câu “lặp đến khi tìm thấy” cần nói rõ điều kiện dừng khi đã duyệt hết dãy mà không thấy phần tử.",
       "topicTags": [
         "Biểu diễn thuật toán"
+      ],
+      "questionIds": [
+        "c5-26",
+        "c5-10",
+        "c5-05",
+        "c5-09",
+        "c5-03",
+        "c5-04",
+        "c5-21",
+        "c5-30"
       ]
     },
     {
@@ -846,6 +1419,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Lưu đồ",
         "Biểu diễn thuật toán"
+      ],
+      "questionIds": [
+        "c5-09",
+        "c5-03",
+        "c5-04",
+        "c5-21",
+        "c5-30",
+        "c5-x07",
+        "c5-x08",
+        "c5-05"
       ]
     },
     {
@@ -856,6 +1439,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Mã giả",
         "Biểu diễn thuật toán"
+      ],
+      "questionIds": [
+        "c5-10",
+        "c5-26",
+        "c5-x09",
+        "c5-21",
+        "c5-05",
+        "c5-33",
+        "c5-x11",
+        "c5-04"
       ]
     },
     {
@@ -865,6 +1458,12 @@ window.IT1140_LESSONS = {
       "example": "Giai thừa: fact(0)=1; fact(n)=n×fact(n−1) với n>0.",
       "topicTags": [
         "Đệ quy"
+      ],
+      "questionIds": [
+        "c5-19",
+        "c5-06",
+        "c5-15",
+        "c5-32"
       ]
     },
     {
@@ -876,6 +1475,16 @@ window.IT1140_LESSONS = {
         "Số học",
         "ƯSCLN",
         "Ví dụ thuật toán"
+      ],
+      "questionIds": [
+        "c5-13",
+        "c5-16",
+        "c5-x16",
+        "c5-x17",
+        "c5-23",
+        "c5-29",
+        "c5-17",
+        "c5-14"
       ]
     },
     {
@@ -888,6 +1497,16 @@ window.IT1140_LESSONS = {
         "Tìm kiếm",
         "Sắp xếp",
         "Ví dụ thuật toán"
+      ],
+      "questionIds": [
+        "c5-17",
+        "c5-22",
+        "c5-x18",
+        "c5-23",
+        "c5-29",
+        "c5-14",
+        "c5-x14",
+        "c5-x15"
       ]
     },
     {
@@ -897,7 +1516,19 @@ window.IT1140_LESSONS = {
       "example": "Fibonacci có thể tính lặp bằng cách giữ hai giá trị trước, tránh gọi đệ quy lặp lại quá nhiều lần.",
       "topicTags": [
         "Ví dụ thuật toán",
-        "Đệ quy"
+        "Đệ quy",
+        "Hàm",
+        "Thuật toán ứng dụng"
+      ],
+      "questionIds": [
+        "c5-14",
+        "c5-23",
+        "c5-19",
+        "c5-06",
+        "c5-15",
+        "c5-32",
+        "c5-x13",
+        "c5-18"
       ]
     }
   ],
@@ -910,6 +1541,14 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Python cơ bản",
         "Ngôn ngữ"
+      ],
+      "questionIds": [
+        "c6-01",
+        "c6-25",
+        "c6-02",
+        "c6-d01",
+        "c6-x02",
+        "c6-05"
       ]
     },
     {
@@ -919,6 +1558,11 @@ window.IT1140_LESSONS = {
       "example": "ADD AX, BX dễ nhớ hơn chuỗi bit tương ứng; a+b trong Python trừu tượng hơn nữa.",
       "topicTags": [
         "Ngôn ngữ"
+      ],
+      "questionIds": [
+        "c6-d01",
+        "c6-25",
+        "c6-x02"
       ]
     },
     {
@@ -929,6 +1573,14 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Python",
         "Python cơ bản"
+      ],
+      "questionIds": [
+        "c6-01",
+        "c6-x01",
+        "c6-x22",
+        "c6-x21",
+        "c6-02",
+        "c6-05"
       ]
     },
     {
@@ -939,6 +1591,12 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Thực thi Python",
         "Thực thi"
+      ],
+      "questionIds": [
+        "c6-27",
+        "c6-x23",
+        "c6-30",
+        "c6-x03"
       ]
     },
     {
@@ -949,6 +1607,11 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Lỗi",
         "Lỗi và số thực"
+      ],
+      "questionIds": [
+        "c6-24",
+        "c6-x20",
+        "c6-x04"
       ]
     },
     {
@@ -959,6 +1622,13 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Thực thi Python",
         "Python"
+      ],
+      "questionIds": [
+        "c6-27",
+        "c6-30",
+        "c6-x22",
+        "c6-x21",
+        "c6-x01"
       ]
     },
     {
@@ -969,6 +1639,15 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Tên và biến",
         "Biến"
+      ],
+      "questionIds": [
+        "c6-17",
+        "c6-03",
+        "c6-x07",
+        "c6-19",
+        "c6-06",
+        "c6-23",
+        "c6-x08"
       ]
     },
     {
@@ -979,6 +1658,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Tên và biến",
         "Python cơ bản"
+      ],
+      "questionIds": [
+        "c6-05",
+        "c6-17",
+        "c6-03",
+        "c6-19",
+        "c6-01",
+        "c6-02",
+        "c6-23",
+        "c6-06"
       ]
     },
     {
@@ -989,6 +1678,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Python cơ bản",
         "Toán tử"
+      ],
+      "questionIds": [
+        "c6-34",
+        "c6-05",
+        "c6-13",
+        "c6-14",
+        "c6-20",
+        "c6-22",
+        "c6-x24",
+        "c6-18"
       ]
     },
     {
@@ -1000,6 +1699,16 @@ window.IT1140_LESSONS = {
         "Kiểu và nhập xuất",
         "Kiểu dữ liệu",
         "Số thực"
+      ],
+      "questionIds": [
+        "c6-11",
+        "c6-29",
+        "c6-16",
+        "c6-33",
+        "c6-x14",
+        "c6-12",
+        "c6-x15",
+        "c6-15"
       ]
     },
     {
@@ -1010,6 +1719,11 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Lỗi và số thực",
         "Số thực"
+      ],
+      "questionIds": [
+        "c6-x14",
+        "c6-24",
+        "c6-x13"
       ]
     },
     {
@@ -1019,6 +1733,16 @@ window.IT1140_LESSONS = {
       "example": "1 + 2 * 3 bằng 7; (1 + 2) * 3 bằng 9.",
       "topicTags": [
         "Toán tử"
+      ],
+      "questionIds": [
+        "c6-18",
+        "c6-22",
+        "c6-13",
+        "c6-08",
+        "c6-x24",
+        "c6-09",
+        "c6-x09",
+        "c6-20"
       ]
     },
     {
@@ -1029,6 +1753,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Toán tử",
         "Kiểu và nhập xuất"
+      ],
+      "questionIds": [
+        "c6-x10",
+        "c6-08",
+        "c6-09",
+        "c6-10",
+        "c6-15",
+        "c6-22",
+        "c6-04",
+        "c6-12"
       ]
     },
     {
@@ -1040,6 +1774,16 @@ window.IT1140_LESSONS = {
         "Kiểu và nhập xuất",
         "Nhập liệu",
         "Nhập xuất"
+      ],
+      "questionIds": [
+        "c6-15",
+        "c6-04",
+        "c6-12",
+        "c6-29",
+        "c6-x18",
+        "c6-21",
+        "c6-16",
+        "c6-33"
       ]
     },
     {
@@ -1050,6 +1794,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Tên và biến",
         "Python cơ bản"
+      ],
+      "questionIds": [
+        "c6-17",
+        "c6-03",
+        "c6-01",
+        "c6-02",
+        "c6-06",
+        "c6-23",
+        "c6-05",
+        "c6-19"
       ]
     },
     {
@@ -1060,6 +1814,16 @@ window.IT1140_LESSONS = {
       "topicTags": [
         "Toán tử",
         "Thực thi Python"
+      ],
+      "questionIds": [
+        "c6-13",
+        "c6-34",
+        "c6-18",
+        "c6-22",
+        "c6-27",
+        "c6-30",
+        "c6-08",
+        "c6-14"
       ]
     }
   ]
