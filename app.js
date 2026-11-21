@@ -783,7 +783,7 @@
   }
 
   function tutorReply(rawQuestion) {
-    const normalized = normalizeText(rawQuestion);
+    const normalized = normalizeText(rawQuestion).trim();
     const asksCurrent = /(cau nay|cau tren|cau dang lam|cau hien tai|dap an cau nay)/.test(normalized);
     if (asksCurrent && session) {
       const question = session.questions[session.index];
@@ -791,31 +791,119 @@
       return `Câu ${session.index + 1}${chapter ? ` · Chương ${chapter.id}: ${chapter.short}` : ""}\n\nĐáp án đúng: ${question.choices[question.answerIndex]}\n\nGiải thích: ${question.explanation}\n\nGợi ý: hãy xác định từ khóa trong đề rồi đối chiếu từng lựa chọn với quy tắc này.`;
     }
 
-    const stopWords = new Set(["va", "la", "gi", "the", "nao", "trong", "cua", "mot", "cho", "voi", "tai", "sao", "nhu", "duoc", "hay", "giup", "minh", "ban", "toi", "ve", "tu", "den", "co", "khong", "neu", "thi", "khi", "cau", "giai", "thich", "hoi", "dap", "on", "tap"]);
-    const tokens = [...new Set((normalized.match(/[a-z0-9_]+/g) || []).filter((token) => token.length > 1 && !stopWords.has(token)))];
-    const hits = new Map();
-    for (const chapter of window.CHAPTERS) {
-      for (const question of chapter.questions) {
-        const prompt = normalizeText(question.prompt);
-        const explanation = normalizeText(question.explanation);
-        const topic = normalizeText(question.topic || "");
-        const context = normalizeText(`${chapter.short} ${chapter.title}`);
-        let score = tokens.reduce((sum, token) => sum + (prompt.includes(token) ? 3 : 0) + (topic.includes(token) ? 3 : 0) + (explanation.includes(token) ? 1 : 0) + (context.includes(token) ? 1 : 0), 0);
-        if (normalized.length > 4 && (prompt.includes(normalized) || explanation.includes(normalized))) score += 7;
-        const key = `${chapter.id}:${question.familyId || question.id}`;
-        if (score && (!hits.has(key) || hits.get(key).score < score)) hits.set(key, { score, chapter, question });
+    const lessonRoutes = [
+      { pattern: /\bco so\b|\bhe dem\b/, chapterId: 1, lessonId: "number-systems" },
+      { pattern: /\bwkid\b/, chapterId: 1, lessonId: "wkid" },
+      { pattern: /\bso nguyen khong dau\b/, chapterId: 1, lessonId: "unsigned" },
+      { pattern: /\bso nguyen co dau\b|\bbu hai\b|\bbu mot\b/, chapterId: 1, lessonId: "signed" },
+      { pattern: /\bieee ?754\b/, chapterId: 1, lessonId: "float-ieee" },
+      { pattern: /\bascii\b|\bunicode\b/, chapterId: 1, lessonId: "characters" },
+      { pattern: /\bbit\b|\bbyte\b|\bkb\b|\bmb\b|\bgb\b/, chapterId: 1, lessonId: "units" },
+      { pattern: /\bcpu\b/, chapterId: 2, lessonId: "cpu" },
+      { pattern: /\bcache\b|\bram\b|\brom\b/, chapterId: 2, lessonId: "main-memory" },
+      { pattern: /\bbus\b/, chapterId: 2, lessonId: "bus" },
+      { pattern: /\bhe dieu hanh\b/, chapterId: 2, lessonId: "os" },
+      { pattern: /\bcli\b|\bgui\b|\bnui\b/, chapterId: 2, lessonId: "interfaces" },
+      { pattern: /\bpan\b|\blan\b|\bman\b|\bwan\b|\bp2p\b/, chapterId: 2, lessonId: "network-types" },
+      { pattern: /\binternet\b/, chapterId: 3, lessonId: "internet-definition" },
+      { pattern: /\biot\b/, chapterId: 3, lessonId: "internet-iot" },
+      { pattern: /\btcp\s*\/\s*ip\b/, chapterId: 3, lessonId: "tcpip" },
+      { pattern: /\bdns\b/, chapterId: 3, lessonId: "dns" },
+      { pattern: /\bsmtp\b|\bpop3\b|\bimap\b/, chapterId: 3, lessonId: "email-protocols" },
+      { pattern: /\bemail\b|\bthu dien tu\b/, chapterId: 3, lessonId: "email" },
+      { pattern: /\bcloud\b|\bdam may\b|\biaas\b|\bpaas\b|\bsaas\b/, chapterId: 3, lessonId: "cloud" },
+      { pattern: /\bphishing\b|\blua dao\b/, chapterId: 3, lessonId: "scams" },
+      { pattern: /\bma hoa\b|\bmfa\b|\botp\b/, chapterId: 3, lessonId: "encryption" },
+      { pattern: /\bgpu\b/, chapterId: 4, lessonId: "gpu" },
+      { pattern: /\bnpu\b/, chapterId: 4, lessonId: "npu" },
+      { pattern: /\bmachine learning\b|\bhoc may\b/, chapterId: 4, lessonId: "ai-ml-dl" },
+      { pattern: /\bllm\b|\bai tao sinh\b/, chapterId: 4, lessonId: "genai-llm" },
+      { pattern: /\biot\b/, chapterId: 4, lessonId: "iot" },
+      { pattern: /\bedge\b/, chapterId: 4, lessonId: "edge-ai" },
+      { pattern: /\bbig data\b|\bdu lieu lon\b/, chapterId: 4, lessonId: "bigdata-5v" },
+      { pattern: /\bblockchain\b/, chapterId: 4, lessonId: "blockchain" },
+      { pattern: /\bthuat toan\b|\balgorithm\b/, chapterId: 5, lessonId: "algorithm-definition" },
+      { pattern: /\bde quy\b|\brecursion\b/, chapterId: 5, lessonId: "recursion" },
+      { pattern: /\bluu do\b|\bflowchart\b/, chapterId: 5, lessonId: "flowchart" },
+      { pattern: /\bma gia\b|\bpseudocode\b/, chapterId: 5, lessonId: "pseudocode" },
+      { pattern: /\bpython\b/, chapterId: 6, lessonId: "python-language" },
+      { pattern: /\binput\s*\(/, chapterId: 6, lessonId: "input-output" },
+      { pattern: /\btoan tu\b|\buu tien phep toan\b/, chapterId: 6, lessonId: "operators-precedence" },
+    ];
+    const route = lessonRoutes.find((candidate) => candidate.pattern.test(normalized));
+    const chapters = window.CHAPTERS || [];
+    const lessonsByChapter = window.IT1140_LESSONS || {};
+    const records = [];
+    for (const chapter of chapters) {
+      const families = Array.isArray(chapter.questionFamilies) ? chapter.questionFamilies : [];
+      for (const lesson of lessonsByChapter[chapter.id] || []) {
+        const ids = new Set(Array.isArray(lesson.questionIds) ? lesson.questionIds : []);
+        const related = families.filter((question) => ids.has(question.id));
+        records.push({ chapter, lesson, related });
       }
     }
-    const results = [...hits.values()].sort((a, b) => b.score - a.score).slice(0, 3);
-    if (!results.length || results[0].score < 2) {
-      return "Mình chưa tìm thấy nội dung khớp đủ rõ trong ngân hàng. Bạn thử hỏi bằng từ khóa cụ thể như WKID, bù hai, IEEE 754, TCP/IP, DNS, IoT, Big Data, đệ quy hoặc input() nhé.";
+
+    const stopWords = new Set(["va", "la", "gi", "the", "nao", "trong", "cua", "mot", "nhung", "hoac", "khi", "duoc", "can", "co", "khong", "neu", "thi", "sao", "nhu", "giup", "minh", "ban", "toi", "ve", "tu", "den", "cau", "giai", "thich", "hoi", "dap", "on", "tap", "vi", "du", "so", "he"]);
+    const words = (value) => new Set(normalizeText(value).match(/[a-z0-9_]+/g) || []);
+    const queryTokens = [...words(normalized)].filter((token) => token.length > 1 && !stopWords.has(token));
+
+    let best = route
+      ? records.find((record) => record.chapter.id === route.chapterId && record.lesson.id === route.lessonId)
+      : null;
+
+    if (!best && queryTokens.length) {
+      const ranked = records.map((record) => {
+        const titleWords = words(record.lesson.title);
+        const topicWords = words((record.lesson.topicTags || []).join(" "));
+        const bodyWords = words(record.lesson.body);
+        const exampleWords = words(record.lesson.example);
+        const detailWords = words(record.related.map((question) => question.prompt + " " + question.explanation).join(" "));
+        let score = 0;
+        let matched = 0;
+        for (const token of queryTokens) {
+          let points = 0;
+          if (titleWords.has(token)) points = 7;
+          else if (topicWords.has(token)) points = 6;
+          else if (bodyWords.has(token)) points = 3;
+          else if (exampleWords.has(token)) points = 2;
+          else if (detailWords.has(token)) points = 1;
+          if (points) {
+            score += points;
+            matched += 1;
+          }
+        }
+        return { record, score, matched };
+      }).filter((entry) => entry.score > 0)
+        .sort((a, b) => b.score - a.score || b.matched - a.matched);
+      const top = ranked[0];
+      const neededMatches = queryTokens.length >= 3 ? 2 : 1;
+      const threshold = queryTokens.length >= 3 ? 6 : 4;
+      if (top && top.score >= threshold && top.matched >= neededMatches) {
+        const runnerUp = ranked.find((entry) => entry.record.lesson.id !== top.record.lesson.id);
+        if (!runnerUp || runnerUp.score < top.score * 0.92) best = top.record;
+        else {
+          return "Mình thấy câu hỏi có thể thuộc vài phần gần nhau. Bạn nói rõ thêm khái niệm hoặc chương nhé; ví dụ “cơ số”, “đổi sang nhị phân”, hoặc “IEEE 754”.";
+        }
+      }
     }
-    const best = results[0];
-    let reply = `Chương ${best.chapter.id} · ${best.chapter.short} — ${best.question.topic || "trọng tâm chương"}\n\n${best.question.explanation}\n\nĐáp án trong câu tương tự: ${best.question.options[best.question.answer]}`;
-    if (results[1] && results[1].score >= best.score * .62 && results[1].question.familyId !== best.question.familyId) {
-      reply += `\n\nLiên hệ thêm (${results[1].question.topic || results[1].chapter.short}): ${results[1].question.explanation}`;
+
+    if (!best) {
+      return "Mình chưa xác định được bạn đang hỏi phần nào trong IT1140 nên chưa muốn đoán. Bạn thử ghi tên khái niệm hoặc thêm một chi tiết, ví dụ “cơ số là gì?”, “đổi 13 sang nhị phân” hoặc “vì sao dùng bù hai” nhé.";
     }
-    return reply;
+
+    const asksExample = /\bvi du\b|\bminh hoa\b|\bcho vd\b/.test(normalized);
+    const parts = [`Chương ${best.chapter.id} · ${best.chapter.title} — ${best.lesson.title}`, best.lesson.body];
+    if (best.lesson.example && (asksExample || route)) parts.push(`Ví dụ: ${best.lesson.example}`);
+    if (!asksExample && !route) {
+      const rankedNotes = best.related.map((question) => {
+        const noteWords = words(question.explanation);
+        const score = queryTokens.filter((token) => noteWords.has(token)).length;
+        return { explanation: question.explanation, score };
+      }).filter((entry) => entry.score > 0)
+        .sort((a, b) => b.score - a.score);
+      if (rankedNotes.length) parts.push(`Chi tiết cần nhớ: ${rankedNotes.slice(0, 2).map((entry) => entry.explanation).join(" ")}`);
+    }
+    return parts.join("\n\n");
   }
 
   function sendChatMessage(value) {
