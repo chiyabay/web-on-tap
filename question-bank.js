@@ -162,6 +162,171 @@
     ],
   };
 
+  const extraAdditions = {
+    1: [
+      item("c1-d01", "easy", "Dữ liệu và thông tin", "Một cảm biến ghi lại giá trị 25 nhưng không ghi tên đại lượng hay đơn vị. Cách diễn giải nào đúng?", ["Đây là dữ liệu thô, cần ngữ cảnh để trở thành thông tin","Đây chắc chắn là nhiệt độ 25°C","Đây đã là tri thức","Đây là dữ liệu có cấu trúc"], "Giá trị 25 đứng riêng chưa cho biết đại lượng hay đơn vị. Ngữ cảnh và cách tổ chức làm dữ liệu trở nên có ý nghĩa."),
+      item("c1-d02", "core", "Nguồn dữ liệu", "Ảnh, âm thanh và số đo cảm biến muốn được máy tính xử lý cần được làm gì?", ["Lấy mẫu hoặc số hóa rồi mã hóa thành biểu diễn số","Chỉ đổi tên tệp","Gắn trực tiếp vào CPU dưới dạng chữ","Xóa phần tín hiệu không nhìn thấy"], "Tín hiệu tự nhiên cần được số hóa, lấy mẫu và mã hóa thành dãy giá trị mà máy tính có thể lưu trữ, xử lý."),
+      item("c1-d03", "easy", "Dữ liệu cơ bản", "Giá trị −12 phù hợp nhất với kiểu dữ liệu cơ bản nào?", ["Số nguyên","Số thực","Ký tự","Bản ghi"], "−12 không có phần thập phân và là giá trị số nguyên có dấu."),
+      item("c1-d04", "easy", "Dữ liệu cơ bản", "Giá trị 2,75 phù hợp nhất với kiểu dữ liệu cơ bản nào?", ["Số thực","Số nguyên","Ký tự","Mảng"], "2,75 có phần thập phân nên được biểu diễn bằng kiểu số thực."),
+      item("c1-d05", "easy", "Dữ liệu cơ bản", "Ký hiệu đơn lẻ như A phù hợp nhất với kiểu dữ liệu cơ bản nào?", ["Ký tự","Số nguyên","Số thực","Mảng"], "Kiểu ký tự dùng để biểu diễn một ký hiệu đơn lẻ; cách mã hóa ký tự thành bit được học ở phần ASCII và Unicode."),
+      item("c1-d06", "core", "Dữ liệu có cấu trúc", "Một bản ghi sinh viên gồm mã số, họ tên và điểm là ví dụ về gì?", ["Dữ liệu có cấu trúc gồm nhiều trường","Một bit","Một số thực đơn lẻ","Tín hiệu chưa số hóa"], "Bản ghi tổ chức nhiều trường dữ liệu có tên và kiểu phù hợp, nên thuộc dữ liệu có cấu trúc."),
+      item("c1-d07", "core", "WKID", "Trong WKID, phân tích nhiều kết quả để rút ra quy luật thuộc tầng nào?", ["Tri thức","Dữ liệu","Thông tin","Trí tuệ"], "Tri thức hình thành khi thông tin được phân tích để nhận ra quy luật. Trí tuệ là dùng hiểu biết đó để lựa chọn hành động.")
+    ],
+    2: [
+      item("c2-d01", "core", "Vào-ra", "Mô-đun vào-ra giúp xử lý sự khác nhau giữa CPU và thiết bị ngoại vi như thế nào?", ["Làm trung gian điều khiển và thích nghi giao tiếp/trao đổi dữ liệu","Thay thế toàn bộ RAM","Biến mọi thiết bị thành CPU","Chỉ lưu tệp lâu dài"], "Mô-đun vào-ra làm trung gian vì thiết bị ngoại vi khác CPU về tốc độ, định dạng dữ liệu và cách điều khiển."),
+      item("c2-d02", "easy", "Phần mềm", "Phần mềm nào là phần mềm hệ thống?", ["Hệ điều hành quản lý tài nguyên máy tính","Trình soạn thảo văn bản phục vụ người dùng","Ứng dụng chỉnh sửa ảnh","Trò chơi điện tử"], "Phần mềm hệ thống vận hành máy và quản lý tài nguyên; ứng dụng hỗ trợ trực tiếp một nhu cầu của người dùng."),
+      item("c2-d03", "core", "Phần mềm", "Trình điều khiển thiết bị (driver) thường thuộc nhóm nào?", ["Phần mềm hệ thống","Phần mềm trình chiếu","Dữ liệu người dùng","Thiết bị nhập"], "Driver phối hợp hệ điều hành với phần cứng, nên thường được xếp vào phần mềm hệ thống."),
+    item("c2-d04", "core", "Hệ điều hành", "Khi nhiều chương trình cùng chạy, hệ điều hành cần làm gì để chia sẻ bộ xử lý?", ["Lập lịch sử dụng CPU và quản lý cấp phát tài nguyên","Biến mọi chương trình thành thiết bị nhập","Xóa các tiến trình đang chờ","Thay thế bộ nhớ ngoài"], "Hệ điều hành quản lý tiến trình và phân chia thời gian CPU, bộ nhớ cùng các tài nguyên khác cho chương trình.")
+    ],
+    3: [
+      item("c3-d01", "core", "Lịch sử Internet", "Việc nhiều mạng độc lập cùng dùng TCP/IP có ý nghĩa gì đối với sự hình thành Internet?", ["Cho phép các mạng khác nhau liên thông theo bộ giao thức chung","Biến mọi máy thành cùng một thiết bị","Loại bỏ hoàn toàn các bộ định tuyến","Chỉ cho phép nối máy tính cùng hãng"], "Bộ giao thức chung cho phép các mạng do tổ chức khác nhau vận hành trao đổi dữ liệu, tạo nên mạng của các mạng."),
+      item("c3-d02", "core", "Kiến trúc mạng", "Trong kiến trúc Internet, mạng lõi chủ yếu làm nhiệm vụ gì?", ["Chuyển tiếp lưu lượng giữa các mạng qua các tuyến tốc độ cao","Cung cấp màn hình cho người dùng","Lưu mọi trang web trên một máy chủ duy nhất","Thay thế thiết bị đầu cuối"], "Mạng lõi gồm các tuyến và thiết bị chuyển tiếp dung lượng cao, liên kết nhiều mạng biên."),
+      item("c3-d03", "core", "Truy nhập Internet", "GPON truyền dữ liệu đến thuê bao chủ yếu qua môi trường nào?", ["Sợi quang thụ động","Cáp đồng trục truyền hình","Bluetooth","Hồng ngoại"], "GPON là công nghệ mạng quang thụ động, dùng sợi quang và các bộ chia quang thụ động."),
+      item("c3-d04", "core", "Đạo đức số", "Khi chia sẻ bài viết của người khác, hành vi nào thể hiện trách nhiệm số?", ["Kiểm tra nguồn và ghi nhận tác giả khi trích dẫn","Xóa tên tác giả để bài viết gọn hơn","Chia sẻ ngay nội dung gây sốc","Đăng thông tin riêng tư để tăng tương tác"], "Đạo đức số gồm tôn trọng người khác, kiểm chứng thông tin và ghi nhận nguồn/tác giả khi sử dụng nội dung."),
+      item("c3-d05", "apply", "Đạo đức số", "Một nhóm chat đăng ảnh bạn học để chế giễu khi chưa được đồng ý. Cách xử lý phù hợp nhất là gì?", ["Gỡ nội dung và tôn trọng quyền riêng tư của bạn","Chuyển ảnh sang nhóm khác","Thêm chú thích hài hước","Lưu ảnh để dùng về sau"], "Trách nhiệm số bao gồm không xâm phạm quyền riêng tư, không quấy rối và gỡ nội dung gây hại."),
+      item("c3-d06", "core", "Bản quyền", "Khi dùng một ảnh có giấy phép Creative Commons yêu cầu ghi công, cần làm gì?", ["Ghi tên tác giả và nguồn theo điều kiện giấy phép","Cắt bỏ watermark rồi đăng lại","Mặc định xem ảnh là thuộc phạm vi công cộng","Chỉ ghi nguồn nếu chủ sở hữu nhắc"], "Giấy phép Creative Commons có các điều kiện sử dụng cụ thể; nếu yêu cầu ghi công thì cần nêu tác giả và nguồn."),
+    item("c3-d07", "core", "DNS", "DNS cache trong máy chủ trung gian có tác dụng chính nào?", ["Lưu tạm kết quả phân giải tên miền để giảm truy vấn lặp","Mã hóa nội dung email","Thay thế giao thức IP","Cấp mật khẩu cho người dùng"], "DNS cache lưu tạm các kết quả phân giải còn hiệu lực, giúp giảm độ trễ và số truy vấn đến các máy chủ DNS phía trên.")
+    ],
+    6: [
+      item("c6-d01", "core", "Ngôn ngữ", "Vì sao chương trình viết bằng ngôn ngữ bậc cao thường dễ chuyển sang máy khác hơn mã máy?", ["Nó ít phụ thuộc trực tiếp vào tập lệnh của một bộ xử lý cụ thể","Nó không cần dịch hay thông dịch","Nó chỉ dùng các bit 0 và 1","Nó luôn chạy nhanh hơn mã máy"], "Ngôn ngữ bậc cao trừu tượng khỏi chi tiết phần cứng; chương trình vẫn cần trình biên dịch hoặc thông dịch phù hợp trên nền tảng đích.")
+    ]
+  };
+
+  const additionalQuestionSets = {
+    1: [
+      item("c1-d08", "apply", "Hệ cơ số", "Đổi 19₁₀ sang nhị phân bằng cách chia liên tiếp cho 2. Kết quả là gì?", ["10011₂","10101₂","11001₂","11100₂"], "Các số dư khi chia 19 liên tiếp cho 2 đọc từ dưới lên tạo thành 10011₂."),
+      item("c1-d09", "apply", "Hệ cơ số", "Đổi 25₁₀ sang hệ bát phân. Kết quả đúng là gì?", ["31₈","25₈","32₈","41₈"], "25 chia 8 được 3 dư 1; đọc số dư ngược lại được 31₈."),
+      item("c1-d10", "apply", "Hệ cơ số", "Biểu diễn 0,375₁₀ dưới dạng nhị phân hữu hạn là gì?", ["0,011₂","0,101₂","0,110₂","0,111₂"], "Nhân phần lẻ lần lượt với 2: 0,375×2=0,75 ghi 0; 0,75×2=1,5 ghi 1; 0,5×2=1 ghi 1. Kết quả là 0,011₂."),
+      item("c1-d11", "apply", "Số nguyên", "Tích nhị phân 101₂ × 11₂ bằng bao nhiêu?", ["1111₂","1011₂","1101₂","10001₂"], "101₂ là 5 và 11₂ là 3; tích 15₁₀ tương ứng 1111₂."),
+      item("c1-d12", "apply", "Số nguyên", "Thương nhị phân 11000₂ ÷ 100₂ bằng bao nhiêu?", ["110₂","100₂","101₂","111₂"], "11000₂ là 24 và 100₂ là 4; 24÷4=6, tức 110₂."),
+      item("c1-d13", "core", "Số nguyên", "Dịch trái một bit một số nguyên nhị phân không dấu (bỏ qua tràn) tương ứng với phép toán nào?", ["Nhân với 2","Chia cho 2 có lấy phần dư","Cộng 1","Đảo tất cả các bit"], "Dịch trái một vị trí làm trọng số mỗi bit tăng gấp đôi, tương ứng nhân giá trị với 2 nếu không xảy ra tràn.")
+    ],
+    2: [
+      item("c2-d05", "apply", "Phần cứng", "Hai CPU có cùng số lõi nhưng tần số xung nhịp khác nhau. Có thể chỉ dựa vào tần số để kết luận CPU nào luôn nhanh hơn không?", ["Không, còn phụ thuộc kiến trúc, bộ nhớ đệm và loại công việc","Có, tần số cao hơn luôn nhanh hơn ở mọi chương trình","Có, vì số lõi không ảnh hưởng hiệu năng","Không, vì tần số không liên quan hiệu năng"], "Tần số là một yếu tố; hiệu năng còn phụ thuộc kiến trúc, số lệnh mỗi chu kỳ, cache, bộ nhớ và đặc điểm chương trình."),
+      item("c2-d06", "core", "Mạng", "Giao thức mạng quan trọng nhất ở điểm nào?", ["Quy định cách thiết bị trao đổi để các bên hiểu cùng một định dạng và trình tự","Tăng dung lượng ổ cứng","Thay thế địa chỉ thiết bị","Chỉ mã hóa tên tệp"], "Giao thức thống nhất quy tắc định dạng, truyền và nhận dữ liệu để thiết bị khác nhau giao tiếp được.")
+    ],
+    3: [
+      item("c3-d08", "core", "IoT", "Đặc điểm nào mô tả đúng Internet vạn vật (IoT)?", ["Thiết bị có cảm biến/khả năng kết nối thu thập và trao đổi dữ liệu qua mạng","Chỉ máy tính để bàn truy cập trang web","Một phần mềm chỉ chạy ngoại tuyến","Mạng chỉ nối các máy chủ trung tâm"], "IoT kết nối các vật thể/thiết bị có khả năng thu thập, trao đổi dữ liệu và có thể thực hiện hành động tự động."),
+      item("c3-d09", "core", "IoT", "Luồng IoT đơn giản nào hợp lý nhất?", ["Cảm biến/thiết bị → kết nối mạng → xử lý dữ liệu → ứng dụng hoặc hành động","Ứng dụng → máy in → cảm biến → xóa dữ liệu","Bàn phím → màn hình → ổ cứng → Internet","Máy chủ → cảm biến → bộ nhớ ROM → bàn phím"], "Thiết bị thu dữ liệu, truyền qua mạng đến nơi xử lý, rồi kết quả được dùng trong ứng dụng hoặc điều khiển thiết bị."),
+      item("c3-d10", "apply", "IoT", "Trong hệ thống tưới cây tự động, bộ phận nào thực hiện hành động sau khi bộ điều khiển nhận số đo độ ẩm thấp?", ["Bộ chấp hành mở van nước","DNS đổi tên miền","Bộ định tuyến cấp IP công cộng","Trình duyệt tải trang web"], "Bộ chấp hành (actuator) biến lệnh điều khiển thành hành động vật lý, chẳng hạn mở van."),
+      item("c3-d11", "core", "Truy nhập Internet", "Ethernet trong mạng gia đình thường kết nối thiết bị bằng gì?", ["Cáp mạng có dây","Sóng vô tuyến Bluetooth","Sợi quang thụ động đến từng thiết bị","Tín hiệu GPS"], "Ethernet là công nghệ mạng có dây phổ biến, thường dùng cáp xoắn đôi để nối thiết bị với switch hoặc router."),
+      item("c3-d12", "core", "Truy nhập Internet", "Thiết bị điện thoại thường truy nhập mạng di động 4G/5G qua thành phần nào?", ["Trạm gốc di động (BTS/cell site)","Máy chủ DNS gốc trực tiếp","Bộ chia quang thụ động GPON trong nhà","Hub Ethernet"], "Mạng di động kết nối thiết bị đầu cuối với trạm gốc; các trạm gốc liên thông qua mạng truy nhập và mạng lõi."),
+      item("c3-d13", "core", "Internet", "Trong bộ giao thức TCP/IP, TCP và IP đảm nhiệm vai trò nào theo cách hiểu khái quát?", ["TCP hỗ trợ truyền tin tin cậy; IP định địa chỉ và chuyển gói tin giữa các mạng","TCP cấp tên miền; IP mã hóa mật khẩu","TCP hiển thị trang web; IP gửi email","Cả hai chỉ dùng để kết nối Wi‑Fi"], "TCP xử lý truyền dữ liệu đầu cuối có kiểm soát; IP đưa gói tin đến mạng/địa chỉ đích."),
+      item("c3-d14", "core", "Internet", "Địa chỉ IP cần thiết chủ yếu để làm gì khi gửi gói tin?", ["Xác định địa chỉ mạng/thiết bị đích để định tuyến","Mã hóa nội dung trang web","Đổi tên miền thành tên người dùng","Xác định loại trình duyệt"], "Địa chỉ IP cung cấp thông tin nguồn/đích ở tầng mạng để bộ định tuyến chuyển tiếp gói tin."),
+      item("c3-d15", "core", "Bản quyền", "Một tác phẩm được đăng công khai trên mạng có thể được sao chép, sửa và dùng thương mại tự do không?", ["Không mặc nhiên; cần xem quyền tác giả và giấy phép sử dụng","Có, vì mọi nội dung trên Internet đều thuộc phạm vi công cộng","Có, nếu tải được về máy","Chỉ cần xóa tên tác giả"], "Việc công khai không làm mất bản quyền. Cần xin phép hoặc tuân theo giấy phép/ngoại lệ pháp luật áp dụng.")
+    ],
+    4: [
+      item("c4-d01", "core", "AI phần cứng", "CPU thường phù hợp nhất với vai trò nào trong hệ thống?", ["Điều khiển và xử lý đa dạng tác vụ tuần tự/điều phối chung","Chỉ thực hiện phép nhân ma trận cho đồ họa","Chỉ chạy mô hình nơ-ron","Chỉ lưu trữ khối dữ liệu"], "CPU là bộ xử lý đa dụng, điều khiển và thực thi nhiều loại lệnh; GPU/NPU tăng tốc các nhóm tác vụ chuyên biệt hơn."),
+      item("c4-d02", "apply", "AI phần cứng", "Tần số CPU cao hơn thường cho biết điều gì nhưng chưa đủ để kết luận điều gì?", ["Nhiều chu kỳ hơn mỗi giây, nhưng chưa đủ để khẳng định mọi chương trình chạy nhanh hơn","CPU có bộ nhớ lớn hơn và luôn xử lý nhanh hơn","CPU có nhiều lõi hơn","CPU có thể thay GPU trong mọi phép tính"], "Tần số biểu thị số chu kỳ mỗi giây; hiệu năng còn phụ thuộc kiến trúc, cache, số lõi và loại tác vụ."),
+      item("c4-d03", "core", "AI phần cứng", "NPU được tối ưu đặc biệt để làm gì?", ["Tăng tốc phép toán thường gặp trong mạng nơ-ron với hiệu quả năng lượng","Thay thế mọi chức năng của hệ điều hành","Lưu dữ liệu người dùng lâu dài","Định tuyến gói tin Internet"], "NPU tăng tốc suy luận AI, đặc biệt các phép toán tensor/ma trận của mạng nơ-ron, thường tiết kiệm năng lượng trên thiết bị."),
+      item("c4-d04", "apply", "AI phần cứng", "Vì sao hệ thống có thể phối hợp CPU, GPU và NPU thay vì chỉ dùng một loại?", ["Mỗi bộ xử lý có thế mạnh khác nhau cho điều khiển, tính toán song song và tác vụ AI","Ba bộ xử lý thực hiện hoàn toàn cùng một vai trò","NPU chỉ dùng để tăng dung lượng RAM","GPU luôn thay CPU điều khiển toàn bộ máy"], "CPU điều phối tác vụ chung; GPU xử lý song song rộng; NPU tối ưu một số phép tính AI. Phối hợp giúp tăng hiệu năng và hiệu quả."),
+      item("c4-d05", "core", "Machine Learning", "Một tập ảnh được gắn nhãn “mèo” hoặc “chó” trước khi huấn luyện thuộc kiểu học nào?", ["Học có giám sát","Học không giám sát","Học tăng cường","Lập trình theo luật cố định"], "Học có giám sát dùng dữ liệu huấn luyện có nhãn để học ánh xạ từ đầu vào đến kết quả mong muốn."),
+      item("c4-d06", "core", "Machine Learning", "Thuật toán tự nhóm khách hàng theo hành vi khi chưa có nhãn nhóm từ trước là ví dụ nào?", ["Học không giám sát","Học có giám sát","Học tăng cường","Dịch mã"], "Học không giám sát tìm cấu trúc hoặc nhóm trong dữ liệu chưa có nhãn đầu ra."),
+      item("c4-d07", "apply", "IoT và Edge", "Vì sao một thiết bị IoT có thể xử lý sơ bộ dữ liệu ngay gần cảm biến?", ["Giảm độ trễ và lượng dữ liệu phải gửi lên cloud","Tăng số bước truyền qua Internet","Bắt buộc phải lưu mọi dữ liệu thô trên thiết bị","Thay thế hoàn toàn cảm biến"], "Xử lý gần nguồn dữ liệu có thể giảm độ trễ, lưu lượng truyền và phụ thuộc vào kết nối cloud."),
+      item("c4-d08", "core", "Big Data", "Sau khi dữ liệu được thu thập, bước nào giúp xử lý bản ghi lỗi hoặc thiếu trước khi phân tích?", ["Làm sạch và tiền xử lý dữ liệu","Tạo hợp đồng thông minh","Đổi dữ liệu thành địa chỉ IP","Bỏ qua kiểm tra chất lượng"], "Trong vòng đời dữ liệu, làm sạch/tiền xử lý giúp giảm lỗi và chuẩn hóa dữ liệu trước phân tích."),
+      item("c4-d09", "core", "Big Data", "Một biểu đồ được chọn phù hợp với loại dữ liệu giúp ích gì?", ["Làm xu hướng, so sánh hoặc ngoại lệ dễ nhận ra hơn","Tự động chứng minh dữ liệu không thiên lệch","Thay thế việc kiểm tra nguồn dữ liệu","Đảm bảo mọi kết luận đều đúng"], "Trực quan hóa hỗ trợ con người nhận ra xu hướng, phân bố và điểm bất thường, nhưng không tự đảm bảo kết luận chính xác.")
+    ]
+  };
+
+  const questionTopicOverrides = {
+    "1": {
+      "c1-01": "Dữ liệu và thông tin",
+      "c1-19": "Dữ liệu và thông tin",
+      "c1-02": "WKID",
+      "c1-x01": "WKID",
+      "c1-06": "Nguồn dữ liệu",
+      "c1-x02": "Nguồn dữ liệu",
+      "c1-27": "Dữ liệu có cấu trúc",
+      "c1-x03": "Dữ liệu có cấu trúc",
+      "c1-03": "Hệ cơ số",
+      "c1-08": "Số nguyên",
+      "c1-09": "Hệ cơ số",
+      "c1-10": "Hệ cơ số",
+      "c1-11": "Số nguyên",
+      "c1-14": "Số nguyên",
+      "c1-15": "Số nguyên",
+      "c1-16": "Số thực",
+      "c1-17": "Số thực",
+      "c1-18": "Hệ cơ số",
+      "c1-20": "Số nguyên",
+      "c1-22": "Hệ cơ số",
+      "c1-23": "Ký tự",
+      "c1-26": "Ký tự",
+      "c1-28": "Số nguyên",
+      "c1-29": "Số nguyên",
+      "c1-32": "Số nguyên",
+      "c1-33": "Số thực",
+      "c1-34": "Số thực",
+      "c1-x23": "Số thực"
+    },
+    "2": {
+      "c2-01": "Phần cứng",
+      "c2-02": "Phần cứng",
+      "c2-03": "Bộ nhớ",
+      "c2-04": "Phần mềm",
+      "c2-05": "Vào-ra",
+      "c2-09": "Mạng",
+      "c2-13": "Mạng",
+      "c2-14": "Hệ điều hành",
+      "c2-15": "Vào-ra",
+      "c2-19": "Bộ nhớ",
+      "c2-20": "Mạng",
+      "c2-21": "Giao diện",
+      "c2-23": "Bộ nhớ",
+      "c2-24": "Tệp",
+      "c2-25": "Phần cứng",
+      "c2-26": "Vào-ra",
+      "c2-29": "Tệp",
+      "c2-30": "Tệp",
+      "c2-32": "Mạng",
+      "c2-33": "Bus",
+      "c2-34": "Giao diện"
+    },
+    "3": {
+      "c3-06": "An toàn",
+      "c3-12": "Mã hóa",
+      "c3-13": "An toàn",
+      "c3-15": "Mã hóa",
+      "c3-20": "An toàn",
+      "c3-22": "An toàn",
+      "c3-23": "Đạo đức số",
+      "c3-28": "An toàn"
+    },
+    "4": {
+      "c4-07": "AI tạo sinh",
+      "c4-08": "LLM",
+      "c4-18": "Big Data",
+      "c4-27": "Big Data"
+    },
+    "5": {
+      "c5-05": "Biểu diễn thuật toán",
+      "c5-13": "ƯSCLN",
+      "c5-26": "Biểu diễn thuật toán",
+      "c5-27": "Giải quyết bài toán",
+      "c5-31": "Dãy số",
+      "c5-33": "Mã giả",
+      "c5-34": "Ví dụ thuật toán",
+      "c5-x04": "ƯSCLN",
+      "c5-x05": "Đặc trưng thuật toán",
+      "c5-x06": "Đặc trưng thuật toán",
+      "c5-x13": "Hàm",
+      "c5-x21": "Thuật toán ứng dụng",
+      "c5-x22": "Thuật toán ứng dụng",
+      "c5-x23": "Thuật toán ứng dụng",
+      "c5-x24": "Thuật toán ứng dụng"
+    },
+    "6": {
+      "c6-01": "Python cơ bản",
+      "c6-11": "Kiểu dữ liệu",
+      "c6-14": "Toán tử",
+      "c6-20": "Toán tử",
+      "c6-21": "Nhập liệu",
+      "c6-22": "Toán tử",
+      "c6-25": "Ngôn ngữ",
+      "c6-34": "Toán tử"
+    }
+  };
+
   const topicMatchers = {
     1: [[/WKID|tri thức|trí tuệ|thông tin|dữ liệu thô/i, "WKID"], [/byte|bit|KB|MB|GB|đơn vị/i, "Đơn vị"], [/ASCII|ký tự|mã ký tự/i, "Ký tự"], [/IEEE|số thực|dấu phẩy|exponent|fraction|float/i, "Số thực"], [/bù hai|bù một|số nguyên|overflow|tràn/i, "Số nguyên"], [/AND|XOR|OR|logic|mặt nạ/i, "Phép logic"], [/hệ cơ số|nhị phân|hexa|hex|bát phân|thập phân/i, "Hệ cơ số"]],
     2: [[/bus|địa chỉ|điều khiển|dữ liệu/i, "Bus"], [/RAM|ROM|cache|bộ nhớ|SSD|ổ đĩa/i, "Bộ nhớ"], [/mạng|router|switch|hub|LAN|WAN|P2P|BTS|cáp|modem|Internet|Wi-?Fi/i, "Mạng"], [/tệp|thư mục|file|wildcard|đường dẫn|Windows/i, "Tệp"], [/ngôn ngữ|hợp ngữ|mã máy/i, "Ngôn ngữ"], [/vào-ra|thiết bị|máy quét/i, "Vào-ra"], [/hệ điều hành|Windows|CLI|GUI|NUI/i, "Hệ điều hành"], [/phần mềm|chương trình/i, "Phần mềm"], [/CPU|ALU|CU|MIPS|chu trình|máy tính/i, "Phần cứng"]],
@@ -172,6 +337,8 @@
   };
 
   function classify(chapterId, question) {
+    const override = questionTopicOverrides[chapterId]?.[question.id];
+    if (override) return override;
     if (question.topic) return question.topic;
     const haystack = `${question.prompt} ${question.explanation}`;
     const match = topicMatchers[chapterId].find(([pattern]) => pattern.test(haystack));
@@ -186,7 +353,7 @@
   }
 
   for (const chapter of window.CHAPTERS) {
-    const authored = [...chapter.questions, ...(additions[chapter.id] || [])];
+    const authored = [...chapter.questions, ...(additions[chapter.id] || []), ...(extraAdditions[chapter.id] || []), ...(additionalQuestionSets[chapter.id] || [])];
     const families = authored.map((question) => ({
       ...question,
       topic: classify(chapter.id, question),
@@ -194,8 +361,9 @@
       sourceChapterId: chapter.id,
     }));
     const bank = [];
-    for (const question of families) {
-      for (let form = 0; form < 3; form += 1) {
+    for (let form = 0; form < 3 && bank.length < 200; form += 1) {
+      for (const question of families) {
+        if (bank.length >= 200) break;
         bank.push({
           ...question,
           id: form === 0 ? question.id : `${question.id}-v${form + 1}`,
