@@ -389,10 +389,23 @@
     return "slide-v2-" + chapterId + "-" + lesson.id;
   }
 
-  function pickLessonChecks(chapter, lesson) {
+  function lessonQuestionPool(chapter, lesson) {
     const families = Array.isArray(chapter.questionFamilies) ? chapter.questionFamilies : chapter.questions;
+    if (Array.isArray(lesson.questionIds)) {
+      const ids = new Set(lesson.questionIds);
+      return families.filter((question) => ids.has(question.id));
+    }
     const tags = Array.isArray(lesson.topicTags) ? lesson.topicTags : [];
-    const tagged = families.filter((question) => tags.includes(question.topic));
+    return families.filter((question) => tags.includes(question.topic));
+  }
+
+  function getLessonTheoryPoints(chapter, lesson) {
+    return [...new Set(lessonQuestionPool(chapter, lesson)
+      .map((question) => String(question.explanation || "").trim())
+      .filter(Boolean))];
+  }
+
+  function pickLessonChecks(chapter, lesson) {
     const shuffle = (items) => {
       const list = [...items];
       for (let i = list.length - 1; i > 0; i -= 1) {
@@ -401,13 +414,7 @@
       }
       return list;
     };
-    const selected = shuffle(tagged).slice(0, 3);
-    const used = new Set(selected.map((question) => question.familyId || question.id));
-    if (selected.length < 3) {
-      const fallback = shuffle(families.filter((question) => !used.has(question.familyId || question.id)));
-      selected.push(...fallback.slice(0, 3 - selected.length));
-    }
-    return selected.map((question) => ({
+    return shuffle(lessonQuestionPool(chapter, lesson)).slice(0, 3).map((question) => ({
       id: question.id,
       level: question.level || "core",
       prompt: question.prompt,
@@ -465,6 +472,10 @@
     if (!chapter || !lesson) return renderHome();
     const number = lessonSession.lessonIndex + 1;
     const key = lessonProgressKey(chapter.id, lesson);
+    const knowledgePoints = getLessonTheoryPoints(chapter, lesson);
+    const knowledgeSection = knowledgePoints.length
+      ? '<section class="lesson-knowledge"><span class="lesson-label">KIẾN THỨC CẦN NẮM</span><ul>' + knowledgePoints.map((point) => '<li>' + escapeHtml(point) + '</li>').join("") + '</ul></section>'
+      : "";
     const questions = lessonSession.checks.map((question, index) => {
       const selected = lessonSession.answers[index];
       const options = question.choices.map((choice, choiceIndex) => {
@@ -495,7 +506,7 @@
     const studyAction = lessonSession.testing ? "" : '<div class="lesson-test-intro"><p>Đọc xong phần này? Làm 3 câu hỏi ngắn để tự kiểm tra và xem giải thích ngay sau khi nộp.</p>' + endActions + '</div>';
     const testSection = lessonSession.testing ? '<section class="lesson-check"><div class="lesson-check-heading"><div><span class="lesson-label">KIỂM TRA NHANH</span><h2>3 câu củng cố kiến thức</h2></div><span class="lesson-check-count">3 câu</span></div>' + questions + endActions + '</section>' : "";
     return '<div class="view-top"><button class="back-button" data-action="lesson-list" aria-label="Quay lại danh sách phần">←</button><div><div class="view-kicker">CHƯƠNG ' + String(chapter.id).padStart(2, "0") + ' · PHẦN ' + String(number).padStart(2, "0") + '</div><h1 class="view-headline">' + escapeHtml(lesson.title) + '</h1></div></div>' +
-      '<article class="lesson-page"><div class="lesson-reading"><span class="lesson-label">BÀI GIẢNG</span><div class="lesson-body">' + escapeHtml(lesson.body).replace(/\n/g, "<br />") + '</div></div>' +
+      '<article class="lesson-page"><div class="lesson-reading"><span class="lesson-label">BÀI GIẢNG</span><div class="lesson-body">' + escapeHtml(lesson.body).replace(/\n/g, "<br />") + '</div></div>' + knowledgeSection +
       '<section class="lesson-example"><span class="lesson-label">VÍ DỤ MINH HỌA</span><p>' + escapeHtml(lesson.example) + '</p></section>' + studyAction + testSection + '</article>';
   }
 
