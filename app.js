@@ -1122,8 +1122,22 @@
     }
     if (screen !== "quiz" || !session) return;
     if (action === "answer") {
-      session.answers[session.index] = Number(button.dataset.index);
+      const activeSession = session;
+      const answeredIndex = session.index;
+      if (session.autoAdvanceTimer) window.clearTimeout(session.autoAdvanceTimer);
+      session.answers[answeredIndex] = Number(button.dataset.index);
       render();
+      activeSession.autoAdvanceTimer = window.setTimeout(() => {
+        if (session !== activeSession || activeSession.index !== answeredIndex) return;
+        activeSession.autoAdvanceTimer = null;
+        if (answeredIndex === activeSession.questions.length - 1) {
+          submitQuiz();
+          return;
+        }
+        activeSession.index = answeredIndex + 1;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 420);
     } else if (action === "jump") {
       session.index = Number(button.dataset.index);
       render();
