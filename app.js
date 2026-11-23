@@ -702,14 +702,7 @@
       </div>`;
   }
 
-  function clearAutoAdvanceTimer(target = session) {
-    if (!target?.autoAdvanceTimer) return;
-    window.clearTimeout(target.autoAdvanceTimer);
-    target.autoAdvanceTimer = null;
-  }
-
   function submitQuiz() {
-    clearAutoAdvanceTimer();
     const total = session.questions.length;
     const unanswered = total - Object.keys(session.answers).length;
     if (unanswered > 0 && !window.confirm(`Bạn còn ${unanswered} câu chưa trả lời. Vẫn nộp bài chứ?`)) return;
@@ -1143,32 +1136,15 @@
     }
     if (screen !== "quiz" || !session) return;
     if (action === "answer") {
-      const activeSession = session;
-      const answeredIndex = session.index;
-      clearAutoAdvanceTimer(activeSession);
-      session.answers[answeredIndex] = Number(button.dataset.index);
+      session.answers[session.index] = Number(button.dataset.index);
       render();
-      activeSession.autoAdvanceTimer = window.setTimeout(() => {
-        if (session !== activeSession || activeSession.index !== answeredIndex) return;
-        activeSession.autoAdvanceTimer = null;
-        if (answeredIndex === activeSession.questions.length - 1) {
-          submitQuiz();
-          return;
-        }
-        activeSession.index = answeredIndex + 1;
-        render();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 1800);
     } else if (action === "jump") {
-      clearAutoAdvanceTimer();
       session.index = Number(button.dataset.index);
       render();
     } else if (action === "prev") {
-      clearAutoAdvanceTimer();
       session.index = Math.max(0, session.index - 1);
       render();
     } else if (action === "next") {
-      clearAutoAdvanceTimer();
       session.index = Math.min(session.questions.length - 1, session.index + 1);
       render();
     } else if (action === "submit") {
