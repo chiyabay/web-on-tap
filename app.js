@@ -92,7 +92,7 @@
   function attemptLabel(attempt) {
     if (attempt.mode === "midterm" || Number(attempt.chapterId) === 0) return "Ôn thi giữa kỳ";
     if (attempt.mode === "lesson") return attempt.lessonTitle || "Bài giảng · " + (chapterById(attempt.chapterId)?.title || "Chương học");
-    if (attempt.mode === "chapter99") return "Luyện 99 câu · " + (chapterById(attempt.chapterId)?.title || "Chương học");
+    if (attempt.mode === "chapter99") return "Luyện 50 câu · " + (chapterById(attempt.chapterId)?.title || "Chương học");
     return chapterById(attempt.chapterId)?.title || "Lượt ôn tập";
   }
 
@@ -205,7 +205,7 @@
             <div class="chapter-card-actions">
               <button class="teach-button" data-action="teach" data-id="${chapter.id}">Giảng dạy <span>✦</span></button>
               <button class="start-button" data-action="start" data-id="${chapter.id}">Luyện 10 câu <span>↗</span></button>
-              <button class="long-round-button" data-action="start-99" data-id="${chapter.id}" title="Làm 99 câu, từ dễ đến vận dụng">Luyện 99 câu <span>✦</span></button>
+              <button class="long-round-button" data-action="start-99" data-id="${chapter.id}" title="Làm 50 câu, từ dễ đến vận dụng">Luyện 50 câu <span>✦</span></button>
               <button class="mistake-button" data-action="mistakes" data-id="${chapter.id}" title="Làm 10 câu từ nội dung đã sai">Ôn lỗi sai <span>${mistakes}</span></button>
             </div>
           </div>
@@ -218,7 +218,7 @@
         <div class="welcome-copy">
           <div class="eyebrow"><span class="eyebrow-mark">✿</span> GÓC HỌC TẬP CỦA BẠN</div>
           <h1 class="page-title">Học chắc từng ý,<br /><em>thi vững từng chương.</em></h1>
-          <p class="page-subtitle">Chào ${escapeHtml(state.userName || "bạn")}! Mỗi chương có ngân hàng 200 câu. Chọn lượt 10 câu, luyện sâu với mục 99 câu từ dễ đến vận dụng, ôn lỗi sai hoặc thử đề giữa kỳ tổng hợp 6 chương.</p>
+          <p class="page-subtitle">Chào ${escapeHtml(state.userName || "bạn")}! Mỗi chương có ngân hàng 200 câu. Chọn lượt 10 câu, luyện sâu với mục 50 câu từ dễ đến vận dụng, ôn lỗi sai hoặc thử đề giữa kỳ tổng hợp 6 chương.</p>
           <div class="hero-decoration" aria-hidden="true"><span>✦</span><span>✿</span><span>✧</span></div>
           <span class="hero-spark" aria-hidden="true">✦</span>
         </div>
@@ -238,7 +238,7 @@
 
       <section aria-labelledby="chapter-heading">
         <div class="section-heading">
-          <div><h2 id="chapter-heading">Sáu chương học</h2><p>1.200 câu trong ngân hàng · mỗi chương có lượt 10 câu và mục luyện 99 câu · ôn lỗi sai riêng</p></div>
+          <div><h2 id="chapter-heading">Sáu chương học</h2><p>1.200 câu trong ngân hàng · mỗi chương có lượt 10 câu và mục luyện 50 câu · ôn lỗi sai riêng</p></div>
           <button class="quiet-link" data-action="history">Xem lịch sử <span>→</span></button>
         </div>
         <div class="chapter-grid">${cards}</div>
@@ -350,7 +350,7 @@
   function buildLongRoundQuiz(chapter) {
     const storeKey = `long-${chapter.id}`;
     const previousIds = Array.isArray(state.lastSets[storeKey]) ? state.lastSets[storeKey] : [];
-    const selected = chooseLongRoundQuestions(chapter, 99, previousIds, storeKey);
+    const selected = chooseLongRoundQuestions(chapter, 50, previousIds, storeKey);
     return formatQuestions(chapter, selected);
   }
 
@@ -653,7 +653,7 @@
       : session.mode === "mistakes"
         ? `ÔN LỖI SAI · CHƯƠNG ${String(chapter.id).padStart(2, "0")}`
         : session.mode === "chapter99"
-          ? `LUYỆN 99 CÂU · DỄ → TRUNG BÌNH → VẬN DỤNG`
+          ? `LUYỆN 50 CÂU · DỄ → TRUNG BÌNH → VẬN DỤNG`
           : `CHƯƠNG ${String(chapter.id).padStart(2, "0")} · ${escapeHtml(chapter.short)}`;
 
     return `
@@ -751,7 +751,7 @@
       : attempt.mode === "mistakes"
         ? `<button class="primary-button compact" data-action="mistakes" data-id="${attempt.chapterId}">Ôn lỗi sai tiếp <span>↻</span></button>`
         : attempt.mode === "chapter99"
-          ? `<button class="primary-button compact" data-action="start-99" data-id="${attempt.chapterId}">Luyện 99 câu tiếp <span>↻</span></button>`
+          ? `<button class="primary-button compact" data-action="start-99" data-id="${attempt.chapterId}">Luyện 50 câu tiếp <span>↻</span></button>`
           : `<button class="primary-button compact" data-action="start" data-id="${attempt.chapterId}">Làm lượt mới <span>↻</span></button>`;
     return `
       <div class="view-top">
@@ -791,7 +791,7 @@
       const label = attemptLabel(attempt);
       return `
         <article class="history-row">
-          <div class="history-chapter"><span class="history-icon" style="background:${chapter?.soft || "#f1e8ff"};color:${chapter?.color || "#9a79c7"}">${chapter?.icon || "✦"}</span><div><strong>${escapeHtml(label)}</strong><small>${attempt.mode === "lesson" ? "Giảng dạy · " + escapeHtml(attempt.lessonTitle || "") : attempt.mode === "mistakes" ? "Ôn lỗi sai" : attempt.mode === "midterm" ? "Tổng hợp 6 chương" : attempt.mode === "chapter99" ? "Luyện 99 câu" : "Luyện 10 câu"} · ${escapeHtml(formatDate(attempt.completedAt))}</small></div></div>
+          <div class="history-chapter"><span class="history-icon" style="background:${chapter?.soft || "#f1e8ff"};color:${chapter?.color || "#9a79c7"}">${chapter?.icon || "✦"}</span><div><strong>${escapeHtml(label)}</strong><small>${attempt.mode === "lesson" ? "Giảng dạy · " + escapeHtml(attempt.lessonTitle || "") : attempt.mode === "mistakes" ? "Ôn lỗi sai" : attempt.mode === "midterm" ? "Tổng hợp 6 chương" : attempt.mode === "chapter99" ? "Luyện 50 câu" : "Luyện 10 câu"} · ${escapeHtml(formatDate(attempt.completedAt))}</small></div></div>
           <div class="history-meta"><span>Điểm số</span><strong>${score}/${total} · ${percent}%</strong></div>
           <div class="history-meta"><span>Thời gian</span><strong>${escapeHtml(formatDuration(attempt.durationSeconds))}</strong></div>
           <span class="score-pill ${percent < 50 ? "low" : ""}">${percent >= 70 ? "✿" : "✧"} ${score}/${total} · ${percent}%</span>
