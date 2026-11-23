@@ -633,12 +633,25 @@
     const index = session.index;
     const question = session.questions[index];
     const selected = session.answers[index];
+    const hasAnswered = Object.prototype.hasOwnProperty.call(session.answers, index);
+    const isCorrect = selected === question.answerIndex;
     const answered = Object.keys(session.answers).length;
     const progress = Math.round(((index + 1) / total) * 100);
-    const options = question.choices.map((option, optionIndex) => `
-      <button class="option-button ${selected === optionIndex ? "selected" : ""}" data-action="answer" data-index="${optionIndex}" aria-pressed="${selected === optionIndex}">
-        <span class="option-key">${LETTERS[optionIndex]}</span><span class="option-text">${escapeHtml(option)}</span>
-      </button>`).join("");
+    const options = question.choices.map((option, optionIndex) => {
+      const feedbackClass = hasAnswered
+        ? optionIndex === question.answerIndex ? " answer-correct" : selected === optionIndex ? " answer-incorrect" : ""
+        : "";
+      return `
+        <button class="option-button ${selected === optionIndex ? "selected" : ""}${feedbackClass}" data-action="answer" data-index="${optionIndex}" aria-pressed="${selected === optionIndex}">
+          <span class="option-key">${LETTERS[optionIndex]}</span><span class="option-text">${escapeHtml(option)}</span>
+        </button>`;
+    }).join("");
+    const instantFeedback = hasAnswered ? `
+      <aside class="instant-feedback ${isCorrect ? "correct" : "incorrect"}" aria-live="polite">
+        <strong class="instant-feedback-title">${isCorrect ? "✓ Chính xác!" : "↺ Chưa đúng rồi"}</strong>
+        <p><strong>Đáp án đúng: ${LETTERS[question.answerIndex]}.</strong> ${escapeHtml(question.choices[question.answerIndex])}</p>
+        ${question.explanation ? `<p class="instant-explanation">${escapeHtml(question.explanation)}</p>` : ""}
+      </aside>` : "";
     const map = session.questions.map((_, questionIndex) => {
       const isAnswered = Object.prototype.hasOwnProperty.call(session.answers, questionIndex);
       return `<button class="map-button ${questionIndex === index ? "current" : ""} ${isAnswered ? "answered" : ""}" data-action="jump" data-index="${questionIndex}" aria-label="Đến câu ${questionIndex + 1}${isAnswered ? ", đã trả lời" : ", chưa trả lời"}">${questionIndex + 1}</button>`;
@@ -670,6 +683,7 @@
           <h2 class="question-title">${escapeHtml(question.prompt)}</h2>
           <p class="question-hint">Chọn một đáp án phù hợp nhất.</p>
           <div class="options-list">${options}</div>
+          ${instantFeedback}
           <div class="quiz-footer">
             <span class="answer-count">Đã trả lời <strong>${answered} / ${total} câu</strong></span>
             <div class="quiz-actions">
@@ -688,7 +702,14 @@
       </div>`;
   }
 
+  function clearAutoAdvanceTimer(target = session) {
+    if (!target?.autoAdvanceTimer) return;
+    window.clearTimeout(target.autoAdvanceTimer);
+    target.autoAdvanceTimer = null;
+  }
+
   function submitQuiz() {
+    clearAutoAdvanceTimer();
     const total = session.questions.length;
     const unanswered = total - Object.keys(session.answers).length;
     if (unanswered > 0 && !window.confirm(`Bạn còn ${unanswered} câu chưa trả lời. Vẫn nộp bài chứ?`)) return;
@@ -1124,7 +1145,7 @@
     if (action === "answer") {
       const activeSession = session;
       const answeredIndex = session.index;
-      if (session.autoAdvanceTimer) window.clearTimeout(session.autoAdvanceTimer);
+      clearAutoAdvanceTimer(activeSession);
       session.answers[answeredIndex] = Number(button.dataset.index);
       render();
       activeSession.autoAdvanceTimer = window.setTimeout(() => {
@@ -1137,14 +1158,17 @@
         activeSession.index = answeredIndex + 1;
         render();
         window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 420);
+      }, 1800);
     } else if (action === "jump") {
+      clearAutoAdvanceTimer();
       session.index = Number(button.dataset.index);
       render();
     } else if (action === "prev") {
+      clearAutoAdvanceTimer();
       session.index = Math.max(0, session.index - 1);
       render();
     } else if (action === "next") {
+      clearAutoAdvanceTimer();
       session.index = Math.min(session.questions.length - 1, session.index + 1);
       render();
     } else if (action === "submit") {
