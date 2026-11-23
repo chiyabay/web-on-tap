@@ -414,14 +414,18 @@
       }
       return list;
     };
-    return shuffle(lessonQuestionPool(chapter, lesson)).slice(0, 3).map((question) => ({
-      id: question.id,
-      level: question.level || "core",
-      prompt: question.prompt,
-      choices: question.options || question.choices || [],
-      answer: question.answer,
-      explanation: question.explanation || "Xem lại mục kiến thức liên quan trong bài giảng.",
-    }));
+    return shuffle(lessonQuestionPool(chapter, lesson)).slice(0, 3).map((question) => {
+      const sourceChoices = question.options || question.choices || [];
+      const shuffledChoices = shuffle(sourceChoices.map((choice, sourceIndex) => ({ choice, sourceIndex })));
+      return {
+        id: question.id,
+        level: question.level || "core",
+        prompt: question.prompt,
+        choices: shuffledChoices.map((item) => item.choice),
+        answer: shuffledChoices.findIndex((item) => item.sourceIndex === question.answer),
+        explanation: question.explanation || "Xem lại mục kiến thức liên quan trong bài giảng.",
+      };
+    });
   }
 
   function startTeaching(chapterId) {
