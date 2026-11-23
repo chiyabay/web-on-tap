@@ -2,7 +2,7 @@
   const STORAGE_KEY = "pinkbyte-it1140-v1";
   const CHAPTER_QUESTION_COUNT = 10;
   const MISTAKE_QUESTION_COUNT = 10;
-  const MIDTERM_QUESTION_COUNT = 12;
+  const MIDTERM_QUESTION_COUNT = 50;
   const MAX_ATTEMPTS = 250;
   const LEVEL_ORDER = ["easy", "core", "apply", "trap"];
   const LEVEL_LABELS = {
@@ -233,7 +233,7 @@
 
       <section class="midterm-card" aria-label="Ôn thi giữa kỳ">
         <div class="midterm-orbit" aria-hidden="true"><span>✦</span><span>✿</span><span>✧</span></div>
-        <div class="midterm-copy"><span class="midterm-kicker">TỔNG HỢP 6 CHƯƠNG</span><h2>Ôn thi giữa kỳ</h2><p>12 câu được chọn ngẫu nhiên từ ngân hàng 1.200 câu, mỗi chương góp 2 câu.</p></div>
+        <div class="midterm-copy"><span class="midterm-kicker">TỔNG HỢP 6 CHƯƠNG</span><h2>Ôn thi giữa kỳ</h2><p>50 câu được chọn ngẫu nhiên từ ngân hàng 1.200 câu, mỗi chương góp 8–9 câu.</p></div>
         <button class="primary-button midterm-button" data-action="midterm">Bắt đầu đề giữa kỳ <span>→</span></button>
       </section>
 
@@ -401,9 +401,14 @@
 
   function buildMidtermQuiz() {
     const previousIds = Array.isArray(state.lastSets.midterm) ? state.lastSets.midterm : [];
+    const basePerChapter = Math.floor(MIDTERM_QUESTION_COUNT / window.CHAPTERS.length);
+    const extraChapterIds = new Set(shuffle(window.CHAPTERS)
+      .slice(0, MIDTERM_QUESTION_COUNT % window.CHAPTERS.length)
+      .map((chapter) => chapter.id));
     const questions = window.CHAPTERS.flatMap((chapter) => {
       const chapterPrevious = previousIds.filter((id) => chapter.questions.some((question) => question.id === id));
-      return formatQuestions(chapter, chooseQuestions(chapter, MIDTERM_QUESTION_COUNT / window.CHAPTERS.length, chapterPrevious));
+      const chapterCount = basePerChapter + (extraChapterIds.has(chapter.id) ? 1 : 0);
+      return formatQuestions(chapter, chooseQuestions(chapter, chapterCount, chapterPrevious));
     });
     const mixed = shuffle(questions);
     state.lastSets.midterm = mixed.map((question) => question.id);
