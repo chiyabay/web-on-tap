@@ -143,7 +143,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(203, 95, 143, .4
 .chapter-card-actions { display: grid; justify-items: stretch; gap: 6px; min-width: 126px; }
 .start-button, .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 39px; padding: 0 15px; border: 1px solid transparent; border-radius: 12px; background: linear-gradient(135deg, #ec8bad, #e878a1); box-shadow: 0 7px 15px rgba(215, 105, 151, .17); color: white; font-size: 10px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
 .start-button:hover, .primary-button:hover { transform: translateY(-2px); box-shadow: 0 10px 19px rgba(215, 105, 151, .24); }
-.start-button span, .primary-button span { font-size: 14px; }
+.long-round-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 39px; padding: 0 15px; border: 1px solid #cfe7f1; border-radius: 12px; background: linear-gradient(135deg,#e6f7ff,#cceefa); color: #397f9a; font-size: 10px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }
+.long-round-button:hover { transform: translateY(-2px); box-shadow: 0 9px 18px rgba(88,164,194,.18); }
+.long-round-button span { font-size: 14px; }
 .mistake-button { display: inline-flex; min-height: 30px; align-items: center; justify-content: center; gap: 7px; padding: 0 10px; border: 1px solid #f0dce6; border-radius: 10px; background: rgba(255,255,255,.77); color: #a56784; font-size: 9px; font-weight: 700; cursor: pointer; transition: .18s ease; }
 .mistake-button:hover { border-color: #eaa8c0; background: #fff1f6; transform: translateY(-1px); }
 .mistake-button span { display: grid; min-width: 19px; height: 19px; place-items: center; padding: 0 5px; border-radius: 999px; background: #f9e5ed; color: #ac5b7f; font-size: 8px; }
