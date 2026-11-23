@@ -92,6 +92,7 @@
   function attemptLabel(attempt) {
     if (attempt.mode === "midterm" || Number(attempt.chapterId) === 0) return "Ôn thi giữa kỳ";
     if (attempt.mode === "lesson") return attempt.lessonTitle || "Bài giảng · " + (chapterById(attempt.chapterId)?.title || "Chương học");
+    if (attempt.mode === "chapter99") return "Luyện 99 câu · " + (chapterById(attempt.chapterId)?.title || "Chương học");
     return chapterById(attempt.chapterId)?.title || "Lượt ôn tập";
   }
 
@@ -178,7 +179,10 @@
     const recent = state.history[0];
     const cards = window.CHAPTERS.map((chapter) => {
       const attempts = getAttemptsFor(chapter.id);
-      const best = attempts.reduce((score, attempt) => Math.max(score, Number(attempt.correctCount || 0)), 0);
+      const bestAttempt = attempts.reduce((best, attempt) => !best
+        || Number(attempt.correctCount || 0) / attemptTotal(attempt) > Number(best.correctCount || 0) / attemptTotal(best)
+        ? attempt
+        : best, null);
       const mistakes = getMistakesFor(chapter.id).length;
       const chapterLessons = window.IT1140_LESSONS?.[chapter.id] || [];
       const doneLessons = chapterLessons.filter((lesson) => state.learningProgress[lessonProgressKey(chapter.id, lesson)]?.completed).length;
@@ -196,11 +200,12 @@
               <span><strong>${attempts.length ? `${attempts.length} lượt` : "Chưa có lượt"}</strong> đã hoàn thành</span>
               <span><strong>${chapter.questions.length} câu</strong> trong ngân hàng</span>
               <span><strong>${doneLessons}/${chapterLessons.length} phần</strong> đã học</span>
-              ${attempts.length ? `<span><strong>${best}/${attemptTotal(attempts[0])}</strong> điểm cao nhất</span>` : ""}
+              ${bestAttempt ? `<span><strong>${bestAttempt.correctCount}/${attemptTotal(bestAttempt)}</strong> điểm cao nhất</span>` : ""}
             </div>
             <div class="chapter-card-actions">
               <button class="teach-button" data-action="teach" data-id="${chapter.id}">Giảng dạy <span>✦</span></button>
-              <button class="start-button" data-action="start" data-id="${chapter.id}">Luyện chương <span>↗</span></button>
+              <button class="start-button" data-action="start" data-id="${chapter.id}">Luyện 10 câu <span>↗</span></button>
+              <button class="long-round-button" data-action="start-99" data-id="${chapter.id}" title="Làm 99 câu, từ dễ đến vận dụng">Luyện 99 câu <span>✦</span></button>
               <button class="mistake-button" data-action="mistakes" data-id="${chapter.id}" title="Làm 10 câu từ nội dung đã sai">Ôn lỗi sai <span>${mistakes}</span></button>
             </div>
           </div>
@@ -213,7 +218,7 @@
         <div class="welcome-copy">
           <div class="eyebrow"><span class="eyebrow-mark">✿</span> GÓC HỌC TẬP CỦA BẠN</div>
           <h1 class="page-title">Học chắc từng ý,<br /><em>thi vững từng chương.</em></h1>
-          <p class="page-subtitle">Chào ${escapeHtml(state.userName || "bạn")}! Mỗi chương có ngân hàng 200 câu. Luyện đề ngẫu nhiên, ôn lại lỗi sai, hoặc thử đề giữa kỳ tổng hợp 6 chương.</p>
+          <p class="page-subtitle">Chào ${escapeHtml(state.userName || "bạn")}! Mỗi chương có ngân hàng 200 câu. Chọn lượt 10 câu, luyện sâu với mục 99 câu từ dễ đến vận dụng, ôn lỗi sai hoặc thử đề giữa kỳ tổng hợp 6 chương.</p>
           <div class="hero-decoration" aria-hidden="true"><span>✦</span><span>✿</span><span>✧</span></div>
           <span class="hero-spark" aria-hidden="true">✦</span>
         </div>
@@ -233,7 +238,7 @@
 
       <section aria-labelledby="chapter-heading">
         <div class="section-heading">
-          <div><h2 id="chapter-heading">Sáu chương học</h2><p>1.200 câu trong ngân hàng · 10 câu mỗi lượt · có mục ôn lỗi sai riêng</p></div>
+          <div><h2 id="chapter-heading">Sáu chương học</h2><p>1.200 câu trong ngân hàng · mỗi chương có lượt 10 câu và mục luyện 99 câu · ôn lỗi sai riêng</p></div>
           <button class="quiet-link" data-action="history">Xem lịch sử <span>→</span></button>
         </div>
         <div class="chapter-grid">${cards}</div>
@@ -300,6 +305,53 @@
   function buildQuiz(chapter) {
     const previousIds = Array.isArray(state.lastSets[chapter.id]) ? state.lastSets[chapter.id] : [];
     return formatQuestions(chapter, chooseQuestions(chapter, CHAPTER_QUESTION_COUNT, previousIds, chapter.id));
+  }
+
+  function chooseLongRoundQuestions(chapter, count, previousIds, storeKey) {
+    let candidates = chapter.questions.filter((question) => !previousIds.includes(question.id));
+    if (candidates.length < count) candidates = [...chapter.questions];
+
+    const shuffled = shuffle(candidates);
+    const selected = [];
+    const selectedIds = new Set();
+    const selectedFamilies = new Set();
+    const familyOf = (question) => question.familyId || question.id;
+    const addUniqueFamilies = (pool, limit = Infinity) => {
+      let added = 0;
+      for (const question of shuffle(pool)) {
+        const familyId = familyOf(question);
+        if (selectedIds.has(question.id) || selectedFamilies.has(familyId)) continue;
+        selected.push(question);
+        selectedIds.add(question.id);
+        selectedFamilies.add(familyId);
+        added += 1;
+        if (selected.length >= count || added >= limit) break;
+      }
+    };
+
+    const levelTarget = Math.ceil(count / LEVEL_ORDER.length);
+    for (const level of LEVEL_ORDER) {
+      addUniqueFamilies(shuffled.filter((question) => question.level === level), levelTarget);
+    }
+    addUniqueFamilies(shuffled);
+    for (const question of shuffled) {
+      if (selected.length >= count) break;
+      if (selectedIds.has(question.id)) continue;
+      selected.push(question);
+      selectedIds.add(question.id);
+    }
+
+    const ordered = selected.slice(0, count).sort((a, b) => LEVEL_ORDER.indexOf(a.level) - LEVEL_ORDER.indexOf(b.level));
+    state.lastSets[storeKey] = ordered.map((question) => question.id);
+    saveState();
+    return ordered;
+  }
+
+  function buildLongRoundQuiz(chapter) {
+    const storeKey = `long-${chapter.id}`;
+    const previousIds = Array.isArray(state.lastSets[storeKey]) ? state.lastSets[storeKey] : [];
+    const selected = chooseLongRoundQuestions(chapter, 99, previousIds, storeKey);
+    return formatQuestions(chapter, selected);
   }
 
   function buildMistakeQuiz(chapter) {
@@ -371,6 +423,12 @@
     const chapter = chapterById(chapterId);
     if (!chapter) return;
     openQuiz({ chapterId: chapter.id, mode: "chapter", questions: buildQuiz(chapter) });
+  }
+
+  function startLongRoundQuiz(chapterId) {
+    const chapter = chapterById(chapterId);
+    if (!chapter) return;
+    openQuiz({ chapterId: chapter.id, mode: "chapter99", questions: buildLongRoundQuiz(chapter) });
   }
 
   function startMistakeQuiz(chapterId) {
@@ -594,7 +652,9 @@
       ? "ĐỀ GIỮA KỲ · TỔNG HỢP 6 CHƯƠNG"
       : session.mode === "mistakes"
         ? `ÔN LỖI SAI · CHƯƠNG ${String(chapter.id).padStart(2, "0")}`
-        : `CHƯƠNG ${String(chapter.id).padStart(2, "0")} · ${escapeHtml(chapter.short)}`;
+        : session.mode === "chapter99"
+          ? `LUYỆN 99 CÂU · DỄ → TRUNG BÌNH → VẬN DỤNG`
+          : `CHƯƠNG ${String(chapter.id).padStart(2, "0")} · ${escapeHtml(chapter.short)}`;
 
     return `
       <div class="view-top">
@@ -690,7 +750,9 @@
       ? `<button class="primary-button compact" data-action="midterm">Làm đề giữa kỳ mới <span>↻</span></button>`
       : attempt.mode === "mistakes"
         ? `<button class="primary-button compact" data-action="mistakes" data-id="${attempt.chapterId}">Ôn lỗi sai tiếp <span>↻</span></button>`
-        : `<button class="primary-button compact" data-action="start" data-id="${attempt.chapterId}">Làm lượt mới <span>↻</span></button>`;
+        : attempt.mode === "chapter99"
+          ? `<button class="primary-button compact" data-action="start-99" data-id="${attempt.chapterId}">Luyện 99 câu tiếp <span>↻</span></button>`
+          : `<button class="primary-button compact" data-action="start" data-id="${attempt.chapterId}">Làm lượt mới <span>↻</span></button>`;
     return `
       <div class="view-top">
         <button class="back-button" data-action="${resultOrigin === "history" ? "history" : "home"}" aria-label="Quay lại">←</button>
@@ -729,7 +791,7 @@
       const label = attemptLabel(attempt);
       return `
         <article class="history-row">
-          <div class="history-chapter"><span class="history-icon" style="background:${chapter?.soft || "#f1e8ff"};color:${chapter?.color || "#9a79c7"}">${chapter?.icon || "✦"}</span><div><strong>${escapeHtml(label)}</strong><small>${attempt.mode === "lesson" ? "Giảng dạy · " + escapeHtml(attempt.lessonTitle || "") : attempt.mode === "mistakes" ? "Ôn lỗi sai" : attempt.mode === "midterm" ? "Tổng hợp 6 chương" : "Luyện chương"} · ${escapeHtml(formatDate(attempt.completedAt))}</small></div></div>
+          <div class="history-chapter"><span class="history-icon" style="background:${chapter?.soft || "#f1e8ff"};color:${chapter?.color || "#9a79c7"}">${chapter?.icon || "✦"}</span><div><strong>${escapeHtml(label)}</strong><small>${attempt.mode === "lesson" ? "Giảng dạy · " + escapeHtml(attempt.lessonTitle || "") : attempt.mode === "mistakes" ? "Ôn lỗi sai" : attempt.mode === "midterm" ? "Tổng hợp 6 chương" : attempt.mode === "chapter99" ? "Luyện 99 câu" : "Luyện 10 câu"} · ${escapeHtml(formatDate(attempt.completedAt))}</small></div></div>
           <div class="history-meta"><span>Điểm số</span><strong>${score}/${total} · ${percent}%</strong></div>
           <div class="history-meta"><span>Thời gian</span><strong>${escapeHtml(formatDuration(attempt.durationSeconds))}</strong></div>
           <span class="score-pill ${percent < 50 ? "low" : ""}">${percent >= 70 ? "✿" : "✧"} ${score}/${total} · ${percent}%</span>
@@ -1029,6 +1091,10 @@
     }
     if (action === "start") {
       startQuiz(button.dataset.id);
+      return;
+    }
+    if (action === "start-99") {
+      startLongRoundQuiz(button.dataset.id);
       return;
     }
     if (action === "mistakes") {
