@@ -34,10 +34,11 @@
         chatMessages: Array.isArray(saved.chatMessages) ? saved.chatMessages : [],
         userName: typeof saved.userName === "string" ? saved.userName : "",
         theme: saved.theme === "kuromi" ? "kuromi" : "doraemon",
+        autoAdvance: saved.autoAdvance === true,
         learningProgress: saved.learningProgress && typeof saved.learningProgress === "object" ? saved.learningProgress : {},
       };
     } catch {
-      return { history: [], lastSets: {}, chatMessages: [], userName: "", theme: "doraemon", learningProgress: {} };
+      return { history: [], lastSets: {}, chatMessages: [], userName: "", theme: "doraemon", autoAdvance: false, learningProgress: {} };
     }
   }
 
@@ -410,7 +411,33 @@
     return mixed;
   }
 
+  function clearAutoAdvanceTimer(target = session) {
+    if (!target?.autoAdvanceTimer) return;
+    window.clearTimeout(target.autoAdvanceTimer);
+    target.autoAdvanceTimer = null;
+  }
+
+  function scheduleAutoAdvance(target = session, questionIndex = target?.index) {
+    clearAutoAdvanceTimer(target);
+    if (!state.autoAdvance || !target || !Object.prototype.hasOwnProperty.call(target.answers, questionIndex)) return;
+    target.autoAdvanceTimer = window.setTimeout(() => {
+      if (session !== target || target.index !== questionIndex || !state.autoAdvance) {
+        target.autoAdvanceTimer = null;
+        return;
+      }
+      target.autoAdvanceTimer = null;
+      if (questionIndex === target.questions.length - 1) {
+        submitQuiz();
+        return;
+      }
+      target.index = questionIndex + 1;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 3000);
+  }
+
   function openQuiz({ chapterId, mode, questions, notice = "" }) {
+    clearAutoAdvanceTimer();
     session = { chapterId, mode, questions, notice, answers: {}, index: 0, startedAt: Date.now() };
     currentResult = null;
     resultOrigin = "live";
@@ -669,6 +696,12 @@
           ? `LUYỆN 50 CÂU · DỄ → TRUNG BÌNH → VẬN DỤNG`
           : `CHƯƠNG ${String(chapter.id).padStart(2, "0")} · ${escapeHtml(chapter.short)}`;
 
+    const advanceMode = `
+      <div class="advance-mode-control" role="group" aria-label="Chế độ chuyển câu">
+        <button class="advance-mode-button ${state.autoAdvance ? "" : "active"}" data-action="advance-mode" data-mode="manual" aria-pressed="${!state.autoAdvance}">Thủ công</button>
+        <button class="advance-mode-button ${state.autoAdvance ? "active" : ""}" data-action="advance-mode" data-mode="auto" aria-pressed="${state.autoAdvance}">Tự động · 3 giây</button>
+      </div>`;
+
     return `
       <div class="view-top">
         <button class="back-button" data-action="home" aria-label="Về tổng quan">←</button>
@@ -681,7 +714,10 @@
           ${session.notice ? `<p class="session-notice">${escapeHtml(session.notice)}</p>` : ""}
           <div class="question-meta"><span class="question-index">CÂU <strong>${String(index + 1).padStart(2, "0")}</strong></span><span class="question-meta-right">${session.mode === "midterm" ? `<span class="chapter-tag">Chương ${question.chapterId} · ${escapeHtml(question.chapterShort)}</span>` : ""}<span class="level-badge level-${question.level}">${LEVEL_LABELS[question.level]}</span></span></div>
           <h2 class="question-title">${escapeHtml(question.prompt)}</h2>
-          <p class="question-hint">Chọn một đáp án phù hợp nhất.</p>
+          <div class="question-mode-row">
+            <p class="question-hint">Chọn một đáp án phù hợp nhất.</p>
+            ${advanceMode}
+          </div>
           <div class="options-list">${options}</div>
           ${instantFeedback}
           <div class="quiz-footer">
@@ -703,6 +739,7 @@
   }
 
   function submitQuiz() {
+    clearAutoAdvanceTimer();
     const total = session.questions.length;
     const unanswered = total - Object.keys(session.answers).length;
     if (unanswered > 0 && !window.confirm(`Bạn còn ${unanswered} câu chưa trả lời. Vẫn nộp bài chứ?`)) return;
@@ -1036,6 +1073,7 @@
   }
 
   function navigate(action) {
+    clearAutoAdvanceTimer();
     if (action === "home") {
       screen = "home";
       session = null;
@@ -1135,16 +1173,28 @@
       return;
     }
     if (screen !== "quiz" || !session) return;
+    if (action === "advance-mode") {
+      state.autoAdvance = button.dataset.mode === "auto";
+      saveState();
+      clearAutoAdvanceTimer();
+      render();
+      if (state.autoAdvance) scheduleAutoAdvance(session, session.index);
+      return;
+    }
     if (action === "answer") {
       session.answers[session.index] = Number(button.dataset.index);
       render();
+      if (state.autoAdvance) scheduleAutoAdvance(session, session.index);
     } else if (action === "jump") {
+      clearAutoAdvanceTimer();
       session.index = Number(button.dataset.index);
       render();
     } else if (action === "prev") {
+      clearAutoAdvanceTimer();
       session.index = Math.max(0, session.index - 1);
       render();
     } else if (action === "next") {
+      clearAutoAdvanceTimer();
       session.index = Math.min(session.questions.length - 1, session.index + 1);
       render();
     } else if (action === "submit") {
